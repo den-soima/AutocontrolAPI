@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="StaticModule"
+    targetNamespace="http://schemas.datacontract.org/2004/07/PlantiT.Base.Infra.Global.Implementation.DataStructure.Serializable"
+    elementFormDefault="qualified"
+    xmlns="http://tempuri.org/StaticModule.xsd"
+    xmlns:mstns="http://tempuri.org/StaticModule.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+  <xs:element name="StaticModuleInformation">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Description" type="xs:string" minOccurs="1" maxOccurs="1"></xs:element>
+        <xs:element name="Version" type="xs:string" minOccurs="1" maxOccurs="1"></xs:element>
+        <xs:element name="Services" minOccurs="1" maxOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Service" minOccurs="1" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="TechName" minOccurs="1" maxOccurs="1">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:pattern value="([0-9a-zA-Z_.-])+" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="Version"                type="xs:string"       minOccurs="1" maxOccurs="1"></xs:element>
+                    <xs:element name="StartUpOrder"           type="xs:unsignedInt"  minOccurs="1" maxOccurs="1"></xs:element>
+                    <xs:element name="CommandPromptArguments" type="xs:string"       minOccurs="1" maxOccurs="1"></xs:element>
+                    <xs:element name="FileExtension"          type="xs:string"       minOccurs="1" maxOccurs="1"></xs:element>
+                    <xs:element name="UrlPathBase"            type="xs:string"       minOccurs="0" maxOccurs="1"></xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Dependencies" minOccurs="1" maxOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ModuleDependency" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="TechName" type="xs:string" minOccurs="1" maxOccurs="1"></xs:element>
+                    <xs:element name="Version"  type="xs:string" minOccurs="1" maxOccurs="1"></xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

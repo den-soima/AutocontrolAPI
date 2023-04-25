@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+
+  <!-- ======================================================================================= -->
+  <!-- ======================================================================================= -->
+  <!-- ======================================================================================= -->
+  <?include $(sys.CURRENTDIR)\Product.wxi ?>
+  <!-- ======================================================================================= -->
+
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+
+      <Directory Id="ProgramFiles64Folder">
+        <Directory Id="DIR_COMPANYINSTALLROOT" Name="ProLeiT" >
+          <Directory Id="DIR_BASEINSTALLROOT" Name="Plant iT base">
+            <Directory Id="DIR_BASEBIN_ROOT" Name="bin">
+              <Directory Id="DIR_BASETOOLS_BIN" Name="tools"/>
+              <Directory Id="DIR_BASEMODULE_BIN" Name="TestModule01"/>
+            </Directory>
+            <Directory Id="DIR_BASEPOWERSHELL_ROOT" Name="PowerShell">
+              <Directory Id="DIR_BASEPOWERSHELL_BIN" Name="PlantiT.Base.TestModule01.Cmdlets"/>
+            </Directory>
+            <Directory Id="dir_BASETEMPLATE_ROOT" Name="install">
+              <Directory Id="dir_BASETEMPLATE_CONFIG" Name="config.templates">
+                <Directory Id="dir_BASETEMPLATE_PROJECT_CONFIG_DIR_FOR_MODULE" Name="TestModule01"/>
+                <Directory Id="dir_BASETEMPLATE_INSTALLEDMODULES" Name="InstalledModules"/>
+              </Directory>
+              <Directory Id="dir_BASETEMPLATE_SAMPLES" Name="samples"/>
+            </Directory>
+            <Directory Id="dir_BASELICENSE_PATH" Name="license">
+            </Directory>
+          </Directory>
+        </Directory>
+      </Directory>
+
+      <Directory Id="dir_Company_ProjectRoot" Name="ProLeiT" >
+        <Directory Id="DIR_BASEPROJECTROOT" Name="Plant iT base">
+          <Directory Id ="dir_PROJECT_ENGINEERING_ROOT" Name="engineering">
+            <Directory Id="dir_PROJECT_ENGINEERING_MODULE" Name="TestModule01"/>
+          </Directory>
+          <Directory Id="dir_PROJECT_CONFIG" Name="config">
+            <Directory Id="dir_PROJECT_CONFIG_DIR_FOR_MODULE" Name="TestModule01"/>
+            <Directory Id="dir_PROJECT_INSTALLEDMODULES" Name="InstalledModules"/>
+          </Directory>
+          <Directory Id="dir_PROJECT_LOG" Name="log"/>
+          <Directory Id ="dir_LOGOPROVIDER_DATA" Name ="data">
+          </Directory>
+        </Directory>
+      </Directory>
+
+      <Directory Id="dir_Company_DataRoot" Name="ProLeiT" >
+        <Directory Id="DIR_COMMON_DEFAULT_DATAROOT" Name="data"/>
+      </Directory>
+
+      <Directory Id="dir_Company_BackupRoot" Name="ProLeiT" >
+        <Directory Id="DIR_COMMON_DEFAULT_BACKUPPATH" Name="backup"/>
+      </Directory>
+
+
+
+    <!-- HINT TO USE "WINDOWSVOLUME"
+     SOURCE: http://www.kentie.net/article/wixtipstricks/
+     HINWEIS(ARJ): Diese Anweisung sollte (Quelle zufolge) helfen "WINDOWSVOLUME" in Deklaration der Verzeichnisse ohne Compilerfehler zu nutzen.
+       WARUM: "WINDOWSVOLUME" soll helfen das Programm-Verzeichnis der Anwendung auf der Systempartition zu lassen, falls
+              Setup kein "Program Files" als Default nutzt. Anderfalls wird eingebaute Logik die "biggest" Partition vorschlagen.
+       STAND 2019-08-xx: Getestet: Originaltipp mit "SetDirectory Id="WINDOWSVOLUME" Value='[WindowsVolume]'" - Anweisung (siehe Product.wxs
+                         ist immer noch relevant. Ohne "SetDirectory" wird der Wunsch für einige Pfade "C:\" als Root zu nutzen schlicht ignoriert.
+       STAND 2018-10-xx: Originaltipp rät die "SetDirectory" - Anweisung zusätzlich zu nutzen, um Compiler-Fehler zu vermeiden.
+-->
+    <!-- - Diese Verzeichnisse sollen per Default auf dem Systemlaufwerk ("C:\") angeboten werden -->
+    <!--   In Setup können sie u.U. geändert werden, aber Default bei Erstinstallation ist "C:\" -->
+    <Directory Id="WINDOWSVOLUME">
+      <!-- - PITWEBPUBROOT: für PiTWeb Anwendungen/Logs/Einstellungen -->
+      <Directory Id="dir_Company_WebAppPubParent" Name="ProLeiT">
+        <Directory Id="DIR_COMMON_DEFAULT_PITWEBPUBROOT" Name="pitwebpub">
+          <Directory Id="DIR_PITWEBAPPROOT" Name="approot">
+            <Directory Id="DIR_PITWEBAPPROOT_MODULE" Name="TestModule01">
+              <Directory Id="DIR_PITWEBAPPROOT_MODULESERVICE" Name="TestService01"/>
+            </Directory>
+          </Directory>
+          <Directory Id="dir_PITWEB_ADMIN_SCRIPTS" Name="adminscripts"/>
+          <Directory Id="dir_PITWEB_LOG" Name="log"/>
+        </Directory>
+      </Directory>
+
+      <!-- - COMMON-Directories fuer Ablage der Setupinformationen (Log, DB-Skripte, ...) -->
+      <Directory Id="DIR_COMPANY_SETUPROOT" Name="ProLeiT">
+        <Directory Id="DIR_COMPANY_SETUPDATAROOT" Name="Setup">
+          <Directory Id="DIR_COMPANY_SETUPDB_DATA" Name="Database"/>
+          <Directory Id="DIR_COMPANY_SETUPLOG_DATA" Name="Log"/>
+        </Directory>
+      </Directory>
+    </Directory>
+
+    </Directory>
+    
+  </Fragment> 
+</Wix>

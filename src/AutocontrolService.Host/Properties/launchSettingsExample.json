@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "AutocontrolService.Host": {
+      "commandName": "Project",
+      "commandLineArgs": "--SslCertThumbprint=\"Please enter SSL-Thumbprint in debug-commandline-arguments!\" --FullyQualifiedDomainName=\"***FQDN in Cmdline-Arguments!***\" --Port=54321 --projectDirectory=\"C:\\PROLEIT\\TestProject\" --UrlPathBase=\"/AutocontrolModule/AutocontrolService\" --piTWebPubPath=\"$(ProjectDir)\\wwwroot\" --piTReverseProxyPort=8777",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:54321/AutocontrolModule/AutocontrolService/swagger"
+    }
+  }
+}

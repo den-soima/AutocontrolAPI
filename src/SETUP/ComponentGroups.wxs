@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+  <Fragment>
+
+    <!-- ======================================================================================= -->
+    <!-- FILE COMPONENT GROURS: Well known static files -->
+    <!-- ======================================================================================= -->
+<!--
+    <ComponentGroup Id="cgrp_Files_Binaries" Directory="DIR_BASEMODULE_BIN">
+      <Component Id="C_DUMMY_BINARY" Guid="1AF5FBA9-5516-4E66-B52C-36EF7F7CC7B8"  KeyPath="yes">
+      </Component>
+    </ComponentGroup>
+-->
+    <ComponentGroup Id="cgrp_Set_PSModule_Path" Directory="DIR_BASEINSTALLROOT">
+      <Component Id="cmp_Set_PSModule_Path" Guid="F592E64B-C1F9-433A-9A1A-EBA07B6DAD82">
+        <CreateFolder/>
+        <Environment Id="POWERSHELLPATH" Name="PSModulePath" Value="[DIR_BASEPOWERSHELL_ROOT]" Part="last" Action="set" System="yes" />
+      </Component>
+    </ComponentGroup>
+
+    <ComponentGroup Id="cgrp_Files_TemplateInstalledModules" Directory="dir_BASETEMPLATE_INSTALLEDMODULES">
+      <Component Id="CMP_BASEINSTALL_INSTALLED_MODULES" Guid="7D3CAB27-1DEB-499B-9734-0D4FA9BFDF7C">
+        <File Id="FILE_BASEINSTALL_INSTALLED_MODULES"  Source="$(var.DropFolderModuleFile)\TestModule01.module" KeyPath="yes" />
+      </Component>
+    </ComponentGroup>
+
+    <ComponentGroup Id="cgrp_Files_ProjectInstalledModules" Directory="dir_PROJECT_INSTALLEDMODULES">
+      <Component Id="CMP_BASECONFIG_INSTALLED_MODULES" Guid="E166CDFF-0D62-4F77-AFA8-2297AF0B5218">
+        <!-- !!! VERY IMPORTANT !!!: KeyPath="yes" because it is deployment settings file, shouldn't be changed, affected by repair... -->
+        <File Id="FILE_BASECONFIG_INSTALLED_MODULES"  Source="$(var.DropFolderModuleFile)\TestModule01.module" KeyPath="yes" />
+      </Component>
+    </ComponentGroup>
+
+  </Fragment>
+</Wix>

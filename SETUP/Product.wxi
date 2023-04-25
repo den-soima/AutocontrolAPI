@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+/* ==========================================================================
+Links:
+  Variables: http://wix.tramontana.co.hu/tutorial/com-expression-syntax-miscellanea/formatted-strings
+========================================================================== */
+-->
+<Include>
+
+  <!-- ======================================================================================= -->
+  <!-- ======================================================================================= -->
+  <!-- ======================================================================================= -->
+  <!-- - IMPORTANT: Change ALL Guids in this section for each new setup -->
+  <!-- ======================================================================================= -->
+  <!-- <?define ProductId   = "YOUR-GUID-4C29-BE52-CD987D61EFD6"?> -->
+  <?define ProductId   = "*"?>
+  <?define PackageId   = "*"?>
+  <?define UpgradeCode = "F91AB423-CDE3-4C5E-80DF-AA41821FD290"?>
+  <?define UpgradeId   = "$(var.UpgradeCode)"?>
+
+  <!-- GUIDs für Komponenten aus <ComponentRegistryGroups.wxs> auch in jedem WiX-Setup neu vergeben -->
+  <!-- <?define guid_cmp_Registry_ProductSettings_XYZ  = "{4675FBF4-B406-452F-9E9E-5BA4BFDCAAC6}"?> -->
+  <?define guid_cmp_Registry_SetupSettings             = "4B5D56EC-6E7A-4CB4-A1DA-D749A9D76551"?>
+  <?define guid_cmp_Registry_Build_CurrentVersion      = "581D9870-D449-4D61-8252-DD966F7EE181"?>
+  <?define guid_cmp_Registry_SetupIdentityEntry        = "93296CA6-02FB-49F1-B4F1-2778F58EAB98"?>
+
+
+  <!-- ======================================================================================= -->
+  <!-- Konstanten zu diversen MSI-Setupkennungen, die in WiX-Setupprojekt genutzt werden -->
+  <!-- Das sind z.B. Setuphersteller/Setupname/Setupversion... -->
+  <!-- Diese Kennungen (mit Ausnahme von "Manufacturer") kommen von Außen (Enrironment/Defines in candle.exe)  -->
+  <!-- ======================================================================================= -->
+  <?define Manufacturer = "ProLeiT"?>
+
+
+  <?ifdef var.BASEMODULE_IDENT_NAME ?>
+  <!-- - BUILD über TFS bekommt immer BASEMODULE_IDENT_NAME ueber "candle.exe"-Kommandozeile. -->
+  <!--   Das erleichtert z.B. Erstellung Vorlagen für wiederverwendbare Setupdateien. -->
+  <?define ProductModuleIdentName = "$(var.BASEMODULE_IDENT_NAME)"?>
+  <?else ?>
+  <!-- - BUILD auf einem DEV-Computer bekommt immer fixen Wert als sinnvollen Default -->
+  <?define ProductModuleIdentName = "TestService01"?>
+  <?endif ?>
+
+
+  <?ifdef env.PUBLISHPROP_VERSION_KEYTEXT ?>
+  <?define ProductSetupName = "Plant iT base module $(var.ProductModuleIdentName) $(env.PUBLISHPROP_VERSION_KEYTEXT)" ?>
+  <?else ?>
+  <?define ProductSetupName = "Plant iT base module $(var.ProductModuleIdentName)" ?>
+  <?endif ?>
+
+
+  <?ifdef env.PUBLISHPROP_VERSION_CURRENTVERSION ?>
+  <!-- - BUILD über TFS bekommt immer CURRENTVERSION als Setupversion und kann so an Kunden ausgeliefert werden. Damit geht Produktversion, CU-Number und CU-Revision aus Setupversion hervor. -->
+  <?define ProductSetupVersion="$(env.PUBLISHPROP_VERSION_CURRENTVERSION)"?>
+  <?else ?>
+  <!-- - BUILD auf DEV-Computer bekommt immer fix "0.1.2.3" als Setupversion und darf so NIE an Kunden ausgeliefert werden, nur DEV-Tests in lokale Umgebung sind damit zulässig -->
+  <?define ProductSetupVersion="0.1.2.3"?>
+  <?endif ?>
+
+
+  <!-- ======================================================================================= -->
+  <!-- Konstanten zu Hersteller und Product, die als Vorgaben fuer Pfade und Registry Key genutzt werden -->
+  <!-- Diese bleiben fuer alle Setups rund um Plant iT infra und Module gleich -->
+  <!-- ======================================================================================= -->
+  <?define ManufacturerRootFolder = "ProLeiT"?>
+  <?define ManufacturerRegRoot = "ProLeiT"?>
+  <?define ProductRootFolder = "Plant iT base"?>
+  <?define ProductRegRoot = "Plant iT base"?>
+  <!-- ======================================================================================= -->
+  <!-- ======================================================================================= -->
+  <!-- ======================================================================================= -->
+
+
+  <!-- ======================================================================================= -->
+  <!-- Spezifische Konstanten zu Produktkomponente oder Modul, die in Pfaden und Registry Keys genutzt werden -->
+  <!-- Diese sind auf diese Komponente/Modul abgestimmt (also keine global gültige Regeln vorhanden) -->
+  <!-- ======================================================================================= -->
+  <?define ProductModuleFolderName = "$(var.ProductModuleIdentName)"?>
+  <?define ProductModuleRegKeyName = "$(var.ProductModuleIdentName)"?>
+  <?define ProductSettingsFullRegRoot = "$(var.ManufacturerRegRoot)\$(var.ProductRegRoot)"?>
+  <?define ProductSetupFullRegRoot    = "$(var.ManufacturerRegRoot)\$(var.ProductRegRoot)\Module\$(var.ProductModuleRegKeyName)"?>
+  <?define PiTBaseInfraRegRoot        = "$(var.ManufacturerRegRoot)\$(var.ProductRegRoot)\Infra"?>
+  <!-- ======================================================================================= -->
+  <!-- ======================================================================================= -->
+  <!-- ======================================================================================= -->
+
+
+  <!-- ======================================================================================= -->
+  <!-- - Setup file identity: wird uber candle.exe uebergeben, z.B. als Helper fuer Namen der SetupLog-Dateien  -->
+  <!-- ======================================================================================= -->
+  <?ifdef var.SETUPFILECORENAME ?>
+  <!-- - BUILD über TFS bekommt immer SETUPFILECORENAME ueber Kommandozeile. -->
+  <!--   Das erleichtert z.B. Erstellung von Multiinstanze-Setups, die im TFS-Build aus gleichen Sourcecode erstellt werden -->
+  <?define ProductSetupFileShortName = "$(var.SETUPFILECORENAME)"?>
+  <?else ?>
+  <!-- - BUILD auf einem DEV-Computer bekommt immer fixen Wert als sinnvollen Default -->
+  <?define ProductSetupFileShortName = "Plant_iT_base_module_$(var.ProductModuleIdentName)"?>
+  <?endif ?>
+  <?define ProductSetupFileMSIName = "$(var.ProductSetupFileShortName).msi"?>
+  <!-- ======================================================================================= -->
+  <!-- ======================================================================================= -->
+  <!-- ======================================================================================= -->
+
+
+</Include>

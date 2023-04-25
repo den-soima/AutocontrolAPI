@@ -1,0 +1,936 @@
+{
+  "options": [
+    {
+      "enabled": false,
+      "definition": {
+        "id": "5d58cc01-7c75-450c-be18-a388ddb129ec"
+      },
+      "inputs": {
+        "branchFilters": "[\"+refs/heads/*\"]",
+        "additionalFields": "{}"
+      }
+    },
+    {
+      "enabled": false,
+      "definition": {
+        "id": "a9db38f9-9fdc-478c-b0f9-464221e58316"
+      },
+      "inputs": {
+        "workItemType": "34",
+        "assignToRequestor": "true",
+        "additionalFields": "{}"
+      }
+    }
+  ],
+  "variables": {
+    "agent.source.skip": {
+      "value": "false"
+    },
+    "BASEMODULE_IDENT_NAME": {
+      "value": "TestModule01"
+    },
+    "BranchName_as_Foldername": {
+      "value": "$(Build.SourceBranchName)"
+    },
+    "Build_ResultFolder_DB": {
+      "value": "$(Build_Results_Root)\\DB"
+    },
+    "Build_ResultFolder_FROMTRANSLATE": {
+      "value": "$(Build_Results_Root)\\FROM_TRANSLATE"
+    },
+    "Build_ResultFolder_INSTALLPATH": {
+      "value": "$(Build_Results_Root)\\INSTALLPATH"
+    },
+    "Build_ResultFolder_PC": {
+      "value": "$(Build_Results_Root)\\PC"
+    },
+    "Build_ResultFolder_TRANSLATE": {
+      "value": "$(Build_Results_Root)\\TRANSLATE"
+    },
+    "Build_ResultFolder_TRANSLATE_PUBLISH": {
+      "value": "$(Build_Results_Root)\\TRANSLATE_PUBLISH"
+    },
+    "Build_ResultFolder_WIXCUSTOMACTION": {
+      "value": "$(Build_Results_Root)\\WIXCUSTOMACTION"
+    },
+    "Build_ResultFolder_ZIP": {
+      "value": "$(Build_Results_Root)\\ZIP"
+    },
+    "Build_Results_Root": {
+      "value": "$(Build.BinariesDirectory)"
+    },
+    "Build_Setup_Frontend_Input_Directory": {
+      "value": "$(Build_Results_Root)\\TestService02Frontend"
+    },
+    "Build_Setup_Input_3RDPARTY_Client": {
+      "value": "$(Build_Setup_Project_Root)\\3RDPARTY.RUNTIME.CLIENT"
+    },
+    "Build_Setup_Input_3RDPARTY_Server": {
+      "value": "$(Build_Setup_Project_Root)\\3RDPARTY.RUNTIME.SERVER"
+    },
+    "Build_Setup_Input_Directory": {
+      "value": "$(Build_Setup_Project_Root)"
+    },
+    "Build_Setup_Input_INSTALLPATH": {
+      "value": "$(Build_Setup_Project_Root)\\INSTALLPATH"
+    },
+    "Build_Setup_Input_INSTALLROOT": {
+      "value": "$(Build_Setup_Project_Root)\\INSTALLROOT"
+    },
+    "Build_Setup_Output_Directory": {
+      "value": "$(Build_Results_Root)\\Setup"
+    },
+    "Build_Setup_Project_Root": {
+      "value": "$(Build.BinariesDirectory)\\SetupInput\\Module"
+    },
+    "Build_TempFolder_PC2INSTALLPATH": {
+      "value": "$(build.artifactstagingdirectory)\\Temp\\PC2INSTALLPATH"
+    },
+    "Build_Tools_Root": {
+      "value": "C:\\ProLeiT\\SDK\\3RDParty"
+    },
+    "BuildConfiguration": {
+      "value": "release"
+    },
+    "BuildPlatform": {
+      "value": "any cpu"
+    },
+    "DeployVersion_as_Foldername": {
+      "value": "V2019"
+    },
+    "DeployVersion_Numeric": {
+      "value": "2019"
+    },
+    "DropFolder": {
+      "value": "TO_BE_CHANGED",
+      "allowOverride": true
+    },
+    "DropFolderSetup": {
+      "value": "TO_BE_CHANGED"
+    },
+    "DropFolderSymbols": {
+      "value": "\\\\tfsnas\\TFS.Symbols\\CC2DEV\\$(System.TeamProject)"
+    },
+    "ModuleName_as_Foldername": {
+      "value": "$(BASEMODULE_IDENT_NAME)"
+    },
+    "ProductVersion_as_Foldername": {
+      "value": "V2019"
+    },
+    "ProductVersion_in_TFS": {
+      "value": "$(PUBLISHPROP_VERSION_KEYTEXT)"
+    },
+    "PUBLISHPROP_BUILD_BRANCH": {
+      "value": "$(BranchName_as_Foldername)"
+    },
+    "PUBLISHPROP_BUILD_CHANGESET": {
+      "value": "$(Build.SourceVersion)"
+    },
+    "PUBLISHPROP_BUILD_DATE": {
+      "value": "(auto)"
+    },
+    "PUBLISHPROP_BUILD_ID": {
+      "value": "$(Build.BuildNumber).$(Build.SourceVersion).$(Build.BuildId), TFSSYS($(System.TeamProject)), Branch ($(Build.SourceBranchName))"
+    },
+    "PUBLISHPROP_BUILD_REPOSITORYNAME": {
+      "value": "$(Build.Repository.Name)"
+    },
+    "PUBLISHPROP_BUILD_TIME": {
+      "value": "(auto)"
+    },
+    "PUBLISHPROP_PRODUCT_NAME": {
+      "value": "Plant iT base"
+    },
+    "PUBLISHPROP_PRODUCT_PART_NAME": {
+      "value": "TestModule01"
+    },
+    "PUBLISHPROP_RELEASE_DATE": {
+      "value": "(auto)",
+      "allowOverride": true
+    },
+    "PUBLISHPROP_RELEASE_NUMBER": {
+      "value": "(auto)"
+    },
+    "PUBLISHPROP_RELEASE_STATUS": {
+      "value": "DEVELOP",
+      "allowOverride": true
+    },
+    "PUBLISHPROP_VERSION_CURRENTVERSION": {
+      "value": "$(PUBLISHPROP_VERSION_NUMBER).$(PUBLISHPROP_VERSION_UPDATENUMBER).$(PUBLISHPROP_VERSION_UPDATEREVISION)"
+    },
+    "PUBLISHPROP_VERSION_DESCRIPTION": {
+      "value": "$(PUBLISHPROP_VERSION_KEYDESC) ($(PUBLISHPROP_VERSION_CURRENTVERSION))"
+    },
+    "PUBLISHPROP_VERSION_KEYDESC": {
+      "value": "$(PUBLISHPROP_VERSION_KEYTEXT) $(PUBLISHPROP_VERSION_UPDATELEVEL)"
+    },
+    "PUBLISHPROP_VERSION_KEYTEXT": {
+      "value": "V$(PUBLISHPROP_VERSION_NUMBER)"
+    },
+    "PUBLISHPROP_VERSION_MAJOR": {
+      "value": "0"
+    },
+    "PUBLISHPROP_VERSION_MINOR": {
+      "value": "0"
+    },
+    "PUBLISHPROP_VERSION_NAME": {
+      "value": "-"
+    },
+    "PUBLISHPROP_VERSION_NUMBER": {
+      "value": "$(PUBLISHPROP_VERSION_MAJOR).$(PUBLISHPROP_VERSION_MINOR)",
+      "allowOverride": true
+    },
+    "PUBLISHPROP_VERSION_UPDATEDATE": {
+      "value": "(auto)"
+    },
+    "PUBLISHPROP_VERSION_UPDATELEVEL": {
+      "value": "CU$(PUBLISHPROP_VERSION_UPDATENUMBER)"
+    },
+    "PUBLISHPROP_VERSION_UPDATENUMBER": {
+      "value": "0",
+      "allowOverride": true
+    },
+    "PUBLISHPROP_VERSION_UPDATEREVISION": {
+      "value": "0"
+    },
+    "system.debug": {
+      "value": "false"
+    },
+    "TeamBuild": {
+      "value": "True"
+    }
+  },
+  "retentionRules": [
+    {
+      "branches": [
+        "+refs/heads/*"
+      ],
+      "artifacts": [
+      ],
+      "artifactTypesToDelete": [
+        "FilePath",
+        "SymbolStore"
+      ],
+      "daysToKeep": 10,
+      "minimumToKeep": 1,
+      "deleteBuildRecord": true,
+      "deleteTestResults": true
+    }
+  ],
+  "properties": {
+  },
+  "tags": [
+  ],
+  "_links": {
+    "self": {
+      "href": "http://hrzsrvcc2-tfs02:8080/tfs/CC2DEV/a868b904-f739-4ac5-b8a5-bb1fe2332168/_apis/build/Definitions/1023?revision=2"
+    },
+    "web": {
+      "href": "http://hrzsrvcc2-tfs02:8080/tfs/CC2DEV/a868b904-f739-4ac5-b8a5-bb1fe2332168/_build/definition?definitionId=1023"
+    },
+    "editor": {
+      "href": "http://hrzsrvcc2-tfs02:8080/tfs/CC2DEV/a868b904-f739-4ac5-b8a5-bb1fe2332168/_build/designer?id=1023&_a=edit-build-definition"
+    },
+    "badge": {
+      "href": "http://hrzsrvcc2-tfs02:8080/tfs/CC2DEV/a868b904-f739-4ac5-b8a5-bb1fe2332168/_apis/build/status/1023"
+    }
+  },
+  "buildNumberFormat": "$(date:yyyyMMdd)$(rev:.r)",
+  "jobAuthorizationScope": 1,
+  "jobTimeoutInMinutes": 180,
+  "jobCancelTimeoutInMinutes": 5,
+  "process": {
+    "phases": [
+      {
+        "steps": [
+          {
+            "environment": {
+            },
+            "enabled": true,
+            "continueOnError": false,
+            "alwaysRun": false,
+            "displayName": "Tools: PrepareBuildVariables",
+            "timeoutInMinutes": 0,
+            "condition": "succeeded()",
+            "task": {
+              "id": "f00a6a27-41c9-462a-ad8d-18e80b788081",
+              "versionSpec": "1.*",
+              "definitionType": "task"
+            },
+            "inputs": {
+              "NightlyCheck": "true",
+              "CU0VersionDescription": "true",
+              "CU0UpdateLevel": "true",
+              "BuildDateVariables": "true",
+              "ReleaseDateNumberVariables": "true",
+              "UpdateDateVariables": "true",
+              "UseBUILDPROPVariables": "true",
+              "IncrementUpdateNumber": "false"
+            }
+          },
+          {
+            "environment": {
+            },
+            "enabled": true,
+            "continueOnError": false,
+            "alwaysRun": false,
+            "displayName": "Plant iT base: UpdateSetupLogo",
+            "timeoutInMinutes": 0,
+            "condition": "succeeded()",
+            "task": {
+              "id": "9f55a356-5bea-4f2a-a190-ebdeebcec613",
+              "versionSpec": "1.*",
+              "definitionType": "task"
+            },
+            "inputs": {
+            }
+          },
+          {
+            "environment": {
+            },
+            "enabled": true,
+            "continueOnError": false,
+            "alwaysRun": false,
+            "displayName": "Create Translate Folder",
+            "timeoutInMinutes": 0,
+            "condition": "succeeded()",
+            "task": {
+              "id": "e213ff0f-5d5c-4791-802d-52ea3e7be1f1",
+              "versionSpec": "1.*",
+              "definitionType": "task"
+            },
+            "inputs": {
+              "scriptType": "inlineScript",
+              "scriptName": "",
+              "arguments": "",
+              "workingFolder": "",
+              "inlineScript": "# create the necessary folder which will be published to the Translate Artifact\nNew-Item -Path $(Build_ResultFolder_TRANSLATE) -ItemType Directory\n",
+              "failOnStandardError": "true"
+            }
+          },
+          {
+            "environment": {
+            },
+            "enabled": true,
+            "continueOnError": false,
+            "alwaysRun": false,
+            "displayName": "Backend: Prepare .resx for translation",
+            "timeoutInMinutes": 0,
+            "condition": "succeeded()",
+            "task": {
+              "id": "e213ff0f-5d5c-4791-802d-52ea3e7be1f1",
+              "versionSpec": "2.*",
+              "definitionType": "task"
+            },
+            "inputs": {
+              "targetType": "filePath",
+              "filePath": "_TFS.BUILD.HELPER/BuildScripts/PrepareBackendTranslation.ps1",
+              "arguments": "-scriptExecutionDir $(build.sourcesDirectory)\\src  -translationDir $(Build_ResultFolder_TRANSLATE) -moduleName $(BASEMODULE_IDENT_NAME)",
+              "script": "# Write your powershell commands here.\n\nWrite-Host \"Hello World\"",
+              "errorActionPreference": "stop",
+              "failOnStderr": "false",
+              "ignoreLASTEXITCODE": "false",
+              "pwsh": "false",
+              "workingDirectory": ""
+            }
+          },
+          {
+            "environment": {
+            },
+            "enabled": true,
+            "continueOnError": false,
+            "alwaysRun": false,
+            "displayName": "Frontend: Prepare .json and .xlf for translation",
+            "timeoutInMinutes": 0,
+            "condition": "succeeded()",
+            "task": {
+              "id": "e213ff0f-5d5c-4791-802d-52ea3e7be1f1",
+              "versionSpec": "2.*",
+              "definitionType": "task"
+            },
+            "inputs": {
+              "targetType": "filePath",
+              "filePath": "_TFS.BUILD.HELPER/BuildScripts/PrepareFrontendTranslation.ps1",
+              "arguments": "-scriptExecutionDir $(build.sourcesDirectory)\\src\\TestService02.Host\\ClientApp -translationDir $(Build_ResultFolder_TRANSLATE) -serviceName TestService02 -splitXliffPath $(build.sourcesDirectory)\\_TFS.BUILD.HELPER\\Tools\\SplitXliff\\",
+              "script": "# Write your powershell commands here.\n\nWrite-Host \"Hello World\"",
+              "errorActionPreference": "silentlyContinue",
+              "failOnStderr": "false",
+              "ignoreLASTEXITCODE": "false",
+              "pwsh": "false",
+              "workingDirectory": ""
+            }
+          },
+          {
+            "environment": {
+            },
+            "enabled": true,
+            "continueOnError": false,
+            "alwaysRun": false,
+            "displayName": "Fetch Artifact: Translated Proleit texts",
+            "timeoutInMinutes": 0,
+            "condition": "succeeded()",
+            "task": {
+              "id": "eac0431e-6ffc-4dc6-be6e-d296e9686ca6",
+              "versionSpec": "3.*",
+              "definitionType": "task"
+            },
+            "inputs": {
+              "project": "22a742d7-2d0e-4dab-bfb0-fe3b3e0b02a5",
+              "buildDefinitionId": "553",
+              "artifactName": "TRANSLATE",
+              "targetDirectory": "$(Build_ResultFolder_FROMTRANSLATE)"
+            }
+          },
+          {
+            "environment": {
+            },
+            "enabled": true,
+            "continueOnError": false,
+            "alwaysRun": false,
+            "displayName": "Fetch Artifact: Translated Kendo texts",
+            "timeoutInMinutes": 0,
+            "condition": "succeeded()",
+            "task": {
+              "id": "eac0431e-6ffc-4dc6-be6e-d296e9686ca6",
+              "versionSpec": "3.*",
+              "definitionType": "task"
+            },
+            "inputs": {
+              "project": "22a742d7-2d0e-4dab-bfb0-fe3b3e0b02a5",
+              "buildDefinitionId": "691",
+              "artifactName": "TRANSLATE",
+              "targetDirectory": "$(Build_ResultFolder_FROMTRANSLATE)"
+            }
+          },
+          {
+            "environment": {
+            },
+            "enabled": true,
+            "continueOnError": false,
+            "alwaysRun": false,
+            "displayName": "Copy .resx from FromTranslate",
+            "timeoutInMinutes": 0,
+            "condition": "succeeded()",
+            "task": {
+              "id": "e213ff0f-5d5c-4791-802d-52ea3e7be1f1",
+              "versionSpec": "2.*",
+              "definitionType": "task"
+            },
+            "inputs": {
+              "targetType": "filePath",
+              "filePath": "_TFS.BUILD.HELPER/BuildScripts/CopyTranslatedResxToSource.ps1",
+              "arguments": "-scriptExecutionDir $(build.sourcesDirectory)\\src  -translationDir $(Build_ResultFolder_FROMTRANSLATE)\\TRANSLATE -moduleName $(BASEMODULE_IDENT_NAME)",
+              "script": "Write-Host Copying all translated .resx for this module to the sources directory.\n\n# Execute this script in the Module folder - this is the folder used for relative paths later on\nSet-Location $(build.sourcesDirectory)\\src\n\n# Loop over all .resx in the solution and copy the corresponding translated files to the\n# source directory where the original file is located.\nforeach ($originalFile in Get-ChildItem . -Filter \"*.resx\" -File -Recurse) {\n    Write-Host Searching tranlsations for $originalFile.FullName\n\n    # Create the file name in the same way as when copying to ToTranslate.\n    $relPath = Resolve-Path -Path $originalFile.FullName -Relative\n    $flattenedName = \"$(BASEMODULE_IDENT_NAME)\" + $relPath.TrimStart(\".\").Replace(\"\\\", \"&\")\n\n    # Fetch the translated version of this file\n    $translatedFiles = Get-ChildItem -Path \"$(Build_Results_Root)\\FROM_TRANSLATE\\TRANSLATE\" -File -Filter $flattenedName -Recurse\n     \n    if ($translatedFiles.Count -eq 0) {\n        Write-Host No translations found for this file.\n    }\n\n    # Copy all translated files to the directory the original files is located (with locale id appended to the filename).\n    foreach ($translatedFile in $translatedFiles) {\n        $locale = $translatedFile.Directory.Name\n        Write-Host Found translation for $locale.\n\n        # Create Targetname: UserMgmt&IdentityProvider&Resources&Views.Home.Index -> Views.Home.Index.en-us.resx\n\n        $targetName = $translatedFile.BaseName + \".\" + $locale + \".resx\"\n        $targetNameSplit = $targetName.Split(\"&\")\n        $targetName = $targetNameSplit[$targetNameSplit.length - 1]\n\n        # Prepare copy statement and copy\n\n        $targetDir = Split-Path -Path $originalFile.FullName\n        $targetPath = Join-Path -Path $targetDir -ChildPath $targetName\n\n        Copy-Item $translatedFile.FullName -Destination $targetPath\n        \n        Write-Host Copied $translatedFile.FullName to $targetPath.\n    }\n}\n\nWrite-Host Copying translated resources successful.",
+              "errorActionPreference": "stop",
+              "failOnStderr": "false",
+              "ignoreLASTEXITCODE": "false",
+              "pwsh": "false",
+              "workingDirectory": ""
+            }
+          },
+          {
+            "environment": {
+            },
+            "enabled": true,
+            "continueOnError": false,
+            "alwaysRun": false,
+            "displayName": "Create Temporary .wxs Files to add the Frontend(s) to for the whole Module",
+            "timeoutInMinutes": 0,
+            "condition": "succeeded()",
+            "task": {
+              "id": "259ab420-be0b-4367-aecb-e0fc8af0c1bf",
+              "versionSpec": "1.*",
+              "definitionType": "task"
+            },
+            "inputs": {
+              "SetupFolder": "$(build.sourcesDirectory)\\SETUP",
+              "SetupInputDir": "$(Build.BinariesDirectory)\\SetupInput"
+            }
+          },
+          {
+            "environment": {
+            },
+            "enabled": true,
+            "continueOnError": false,
+            "alwaysRun": false,
+            "displayName": "dotnet restore",
+            "timeoutInMinutes": 0,
+            "condition": "succeeded()",
+            "task": {
+              "id": "5541a522-603c-47ad-91fc-a4b1d163081b",
+              "versionSpec": "2.*",
+              "definitionType": "task"
+            },
+            "inputs": {
+              "command": "restore",
+              "publishWebProjects": "true",
+              "projects": "$(Parameters.projects)",
+              "custom": "",
+              "arguments": "",
+              "publishTestResults": "true",
+              "testRunTitle": "",
+              "zipAfterPublish": "true",
+              "modifyOutputPath": "true",
+              "selectOrConfig": "config",
+              "feedRestore": "",
+              "includeNuGetOrg": "true",
+              "nugetConfigPath": "NuGet.Config",
+              "externalEndpoints": "",
+              "noCache": "false",
+              "packagesDirectory": "",
+              "verbosityRestore": "Detailed",
+              "searchPatternPush": "$(Build.ArtifactStagingDirectory)/*.nupkg",
+              "nuGetFeedType": "internal",
+              "feedPublish": "",
+              "publishPackageMetadata": "true",
+              "externalEndpoint": "",
+              "searchPatternPack": "**/*.csproj",
+              "configurationToPack": "$(BuildConfiguration)",
+              "outputDir": "$(Build.ArtifactStagingDirectory)",
+              "nobuild": "false",
+              "includesymbols": "false",
+              "includesource": "false",
+              "versioningScheme": "off",
+              "versionEnvVar": "",
+              "requestedMajorVersion": "1",
+              "requestedMinorVersion": "0",
+              "requestedPatchVersion": "0",
+              "buildProperties": "",
+              "verbosityPack": "Detailed",
+              "workingDirectory": ""
+            }
+          },
+          {
+            "environment": {
+            },
+            "enabled": true,
+            "continueOnError": false,
+            "alwaysRun": false,
+            "displayName": "dotnet publish",
+            "timeoutInMinutes": 0,
+            "condition": "succeeded()",
+            "task": {
+              "id": "5541a522-603c-47ad-91fc-a4b1d163081b",
+              "versionSpec": "2.*",
+              "definitionType": "task"
+            },
+            "inputs": {
+              "command": "publish",
+              "publishWebProjects": "false",
+              "projects": "src/*.sln",
+              "custom": "",
+              "arguments": "--configuration $(BuildConfiguration) --output $(Build_Setup_Project_Root) --self-contained --no-restore  /p:Version=$(PUBLISHPROP_VERSION_CURRENTVERSION)",
+              "publishTestResults": "true",
+              "testRunTitle": "",
+              "zipAfterPublish": "false",
+              "modifyOutputPath": "false",
+              "selectOrConfig": "select",
+              "feedRestore": "",
+              "includeNuGetOrg": "true",
+              "nugetConfigPath": "",
+              "externalEndpoints": "",
+              "noCache": "false",
+              "packagesDirectory": "",
+              "verbosityRestore": "Detailed",
+              "searchPatternPush": "$(Build.ArtifactStagingDirectory)/*.nupkg",
+              "nuGetFeedType": "internal",
+              "feedPublish": "",
+              "publishPackageMetadata": "true",
+              "externalEndpoint": "",
+              "searchPatternPack": "**/*.csproj",
+              "configurationToPack": "$(BuildConfiguration)",
+              "outputDir": "$(Build.ArtifactStagingDirectory)",
+              "nobuild": "false",
+              "includesymbols": "false",
+              "includesource": "false",
+              "versioningScheme": "off",
+              "versionEnvVar": "",
+              "requestedMajorVersion": "1",
+              "requestedMinorVersion": "0",
+              "requestedPatchVersion": "0",
+              "buildProperties": "",
+              "verbosityPack": "Detailed",
+              "workingDirectory": ""
+            }
+          },
+          {
+            "environment": {
+            },
+            "enabled": true,
+            "continueOnError": false,
+            "alwaysRun": false,
+            "displayName": "dotnet test",
+            "timeoutInMinutes": 0,
+            "condition": "succeeded()",
+            "task": {
+              "id": "5541a522-603c-47ad-91fc-a4b1d163081b",
+              "versionSpec": "2.*",
+              "definitionType": "task"
+            },
+            "inputs": {
+              "command": "test",
+              "publishWebProjects": "true",
+              "projects": "$(Build.SourcesDirectory)/src/*.sln",
+              "custom": "",
+              "arguments": "/nodereuse:false --logger trx --no-restore",
+              "publishTestResults": "true",
+              "testRunTitle": "",
+              "zipAfterPublish": "true",
+              "modifyOutputPath": "true",
+              "selectOrConfig": "select",
+              "feedRestore": "",
+              "includeNuGetOrg": "true",
+              "nugetConfigPath": "",
+              "externalEndpoints": "",
+              "noCache": "false",
+              "packagesDirectory": "",
+              "verbosityRestore": "Detailed",
+              "searchPatternPush": "$(Build.ArtifactStagingDirectory)/*.nupkg",
+              "nuGetFeedType": "internal",
+              "feedPublish": "",
+              "publishPackageMetadata": "true",
+              "externalEndpoint": "",
+              "searchPatternPack": "**/*.csproj",
+              "configurationToPack": "$(BuildConfiguration)",
+              "outputDir": "$(Build.ArtifactStagingDirectory)",
+              "nobuild": "false",
+              "includesymbols": "false",
+              "includesource": "false",
+              "versioningScheme": "off",
+              "versionEnvVar": "",
+              "requestedMajorVersion": "1",
+              "requestedMinorVersion": "0",
+              "requestedPatchVersion": "0",
+              "buildProperties": "",
+              "verbosityPack": "Detailed",
+              "workingDirectory": ""
+            }
+          },
+          {
+            "environment": {
+            },
+            "enabled": true,
+            "continueOnError": false,
+            "alwaysRun": false,
+            "displayName": "Build Wix Setup",
+            "timeoutInMinutes": 0,
+            "condition": "succeeded()",
+            "task": {
+              "id": "e213ff0f-5d5c-4791-802d-52ea3e7be1f1",
+              "versionSpec": "1.*",
+              "definitionType": "task"
+            },
+            "inputs": {
+              "scriptType": "filePath",
+              "scriptName": "_TFS.BUILD.HELPER/BuildScripts/CreateSetupTFS.ps1",
+              "arguments": "-SetupInputDir \"$(Build.BinariesDirectory)\\SetupInput\" -ModuleName \"TestModule01\" -BuildToolsDir \"$(Build_Tools_Root)\" -SetupFolder \"$(build.sourcesDirectory)\\SETUP\" -SetupOutputDir \"$(Build.BinariesDirectory)\\SetupOutput\"",
+              "workingFolder": "",
+              "inlineScript": "# You can write your powershell scripts inline here. \n# You can also pass predefined and custom variables to this scripts using arguments\n\n Write-Host \"Hello World\"",
+              "failOnStandardError": "true"
+            }
+          },
+          {
+            "environment": {
+            },
+            "enabled": false,
+            "continueOnError": true,
+            "alwaysRun": false,
+            "displayName": "Publish symbols path: $(DropFolderSymbols)",
+            "timeoutInMinutes": 0,
+            "condition": "succeeded()",
+            "refName": "",
+            "task": {
+              "id": "0675668a-7bba-4ccb-901d-5ad6554ca653",
+              "versionSpec": "2.*",
+              "definitionType": "task"
+            },
+            "inputs": {
+              "SymbolsFolder": "$(Build_ResultFolder_PC)",
+              "SearchPattern": "**\\*.pdb",
+              "IndexSources": "true",
+              "PublishSymbols": "true",
+              "SymbolServerType": "FileShare",
+              "SymbolsPath": "$(DropFolderSymbols)",
+              "CompressSymbols": "false",
+              "DetailedLog": "true",
+              "TreatNotIndexedAsWarning": "true",
+              "SymbolsMaximumWaitTime": "",
+              "SymbolsProduct": "$(Parameters.SymbolsProduct)",
+              "SymbolsVersion": "",
+              "SymbolsArtifactName": "Symbols_$(BuildConfiguration)"
+            }
+          },
+          {
+            "environment": {
+            },
+            "enabled": false,
+            "continueOnError": false,
+            "alwaysRun": true,
+            "displayName": "Publish Artifact: PC",
+            "timeoutInMinutes": 0,
+            "condition": "succeededOrFailed()",
+            "refName": "",
+            "task": {
+              "id": "2ff763a7-ce83-4e1f-bc89-0ae63477cebe",
+              "versionSpec": "1.*",
+              "definitionType": "task"
+            },
+            "inputs": {
+              "PathtoPublish": "$(Build_ResultFolder_PC)",
+              "ArtifactName": "PC",
+              "ArtifactType": "FilePath",
+              "TargetPath": "$(DropFolder)\\$(Build.BuildNumber)",
+              "Parallel": "false",
+              "ParallelCount": "8"
+            }
+          },
+          {
+            "environment": {
+            },
+            "enabled": false,
+            "continueOnError": false,
+            "alwaysRun": true,
+            "displayName": "Publish Artifact: INSTALLPATH",
+            "timeoutInMinutes": 0,
+            "condition": "succeededOrFailed()",
+            "refName": "",
+            "task": {
+              "id": "2ff763a7-ce83-4e1f-bc89-0ae63477cebe",
+              "versionSpec": "1.*",
+              "definitionType": "task"
+            },
+            "inputs": {
+              "PathtoPublish": "$(Build_ResultFolder_INSTALLPATH)",
+              "ArtifactName": "INSTALLPATH",
+              "ArtifactType": "FilePath",
+              "TargetPath": "$(DropFolder)\\$(Build.BuildNumber)",
+              "Parallel": "false",
+              "ParallelCount": "8"
+            }
+          },
+          {
+            "environment": {
+            },
+            "enabled": false,
+            "continueOnError": false,
+            "alwaysRun": true,
+            "displayName": "Publish Artifact: SETUP",
+            "timeoutInMinutes": 0,
+            "condition": "succeededOrFailed()",
+            "refName": "",
+            "task": {
+              "id": "2ff763a7-ce83-4e1f-bc89-0ae63477cebe",
+              "versionSpec": "1.*",
+              "definitionType": "task"
+            },
+            "inputs": {
+              "PathtoPublish": "$(Build_Setup_Output_Directory)",
+              "ArtifactName": "SETUP",
+              "ArtifactType": "FilePath",
+              "TargetPath": "$(DropFolder)\\$(Build.BuildNumber)",
+              "Parallel": "false",
+              "ParallelCount": "8"
+            }
+          },
+          {
+            "environment": {
+            },
+            "enabled": false,
+            "continueOnError": false,
+            "alwaysRun": true,
+            "displayName": "Publish Artifact: SETUP.SOURCES",
+            "timeoutInMinutes": 0,
+            "condition": "succeededOrFailed()",
+            "refName": "",
+            "task": {
+              "id": "2ff763a7-ce83-4e1f-bc89-0ae63477cebe",
+              "versionSpec": "1.*",
+              "definitionType": "task"
+            },
+            "inputs": {
+              "PathtoPublish": "$(Build_Setup_Project_Root)",
+              "ArtifactName": "SETUP.SOURCES",
+              "ArtifactType": "FilePath",
+              "TargetPath": "$(DropFolder)\\$(Build.BuildNumber)",
+              "Parallel": "false",
+              "ParallelCount": "8"
+            }
+          },
+          {
+            "environment": {
+            },
+            "enabled": true,
+            "continueOnError": false,
+            "alwaysRun": false,
+            "displayName": "Delete Setupbuildfolder after copying has finished)",
+            "timeoutInMinutes": 0,
+            "condition": "succeeded()",
+            "refName": "",
+            "task": {
+              "id": "b7e8b412-0437-4065-9371-edc5881de25b",
+              "versionSpec": "1.*",
+              "definitionType": "task"
+            },
+            "inputs": {
+              "SourceFolder": "$(Build_Setup_Project_Root)",
+              "Contents": "**"
+            }
+          },
+          {
+            "environment": {
+            },
+            "enabled": true,
+            "continueOnError": false,
+            "alwaysRun": false,
+            "displayName": "Delete Build Summary after copying has finished",
+            "timeoutInMinutes": 0,
+            "condition": "succeeded()",
+            "refName": "",
+            "task": {
+              "id": "b7e8b412-0437-4065-9371-edc5881de25b",
+              "versionSpec": "1.*",
+              "definitionType": "task"
+            },
+            "inputs": {
+              "SourceFolder": "$(Build_Summary_Root)",
+              "Contents": "**"
+            }
+          },
+          {
+            "environment": {
+            },
+            "enabled": true,
+            "continueOnError": false,
+            "alwaysRun": false,
+            "displayName": "Clean Agent Directories",
+            "timeoutInMinutes": 0,
+            "condition": "succeeded()",
+            "task": {
+              "id": "175c8a10-0ef0-11e7-936d-2100de00518d",
+              "versionSpec": "3.*",
+              "definitionType": "task"
+            },
+            "inputs": {
+              "disableCertCheck": "false"
+            }
+          }
+        ],
+        "name": "Phase 1",
+        "refName": "Phase_1",
+        "condition": "succeeded()",
+        "target": {
+          "executionOptions": {
+            "type": 0
+          },
+          "allowScriptsAuthAccessOption": true,
+          "type": 1
+        },
+        "jobAuthorizationScope": 1,
+        "jobCancelTimeoutInMinutes": 1
+      }
+    ],
+    "type": 1
+  },
+  "repository": {
+    "properties": {
+      "cleanOptions": "3",
+      "labelSources": "0",
+      "labelSourcesFormat": "$(build.buildNumber)",
+      "reportBuildStatus": "true",
+      "gitLfsSupport": "false",
+      "skipSyncSource": "false",
+      "checkoutNestedSubmodules": "false",
+      "fetchDepth": "0"
+    },
+    "id": "374bc460-b541-4cd6-8b33-decca25abc65",
+    "type": "TfsGit",
+    "name": "ABN.dev Templatetest",
+    "url": "http://hrzsrvcc2-tfs02:8080/tfs/CC2DEV/Plant%20iT%20base%20modules/_git/ABN.dev%20Templatetest",
+    "defaultBranch": "refs/heads/master",
+    "clean": "false",
+    "checkoutSubmodules": false
+  },
+  "processParameters": {
+    "inputs": [
+      {
+        "aliases": [
+        ],
+        "options": {
+        },
+        "properties": {
+        },
+        "name": "SymbolsProduct",
+        "label": "Product",
+        "defaultValue": "Workflow",
+        "type": "string",
+        "helpMarkDown": "Specify the product parameter to symstore.exe.  The default is $(Build.DefinitionName)",
+        "visibleRule": "",
+        "groupName": ""
+      },
+      {
+        "aliases": [
+        ],
+        "options": {
+        },
+        "properties": {
+        },
+        "name": "projects",
+        "label": "Project(s) to restore and build",
+        "defaultValue": "**/*.csproj",
+        "type": "multiLine",
+        "helpMarkDown": "The path to the csproj file(s) to use. You can use wildcards (e.g. **/.csproj for all .csproj files in all subfolders).",
+        "visibleRule": "",
+        "groupName": ""
+      }
+    ]
+  },
+  "quality": 1,
+  "authoredBy": {
+    "displayName": "Andreas Bennefeld",
+    "url": "http://hrzsrvcc2-tfs02:8080/tfs/CC2DEV/_apis/Identities/26b8be8b-6c59-42ba-b5e5-d6e090292dc9",
+    "_links": {
+      "avatar": {
+        "href": "http://hrzsrvcc2-tfs02:8080/tfs/CC2DEV/_apis/GraphProfile/MemberAvatars/win.Uy0xLTUtMjEtMjQyNjQyMzY1NS0zODA4OTE5NjgtMTU5OTY5MTgyMS02MzMy"
+      }
+    },
+    "id": "26b8be8b-6c59-42ba-b5e5-d6e090292dc9",
+    "uniqueName": "PROLEIT-AG\\Andreas_Bennefeld",
+    "imageUrl": "http://hrzsrvcc2-tfs02:8080/tfs/CC2DEV/_apis/GraphProfile/MemberAvatars/win.Uy0xLTUtMjEtMjQyNjQyMzY1NS0zODA4OTE5NjgtMTU5OTY5MTgyMS02MzMy",
+    "descriptor": "win.Uy0xLTUtMjEtMjQyNjQyMzY1NS0zODA4OTE5NjgtMTU5OTY5MTgyMS02MzMy"
+  },
+  "drafts": [
+  ],
+  "queue": {
+    "_links": {
+      "self": {
+        "href": "http://hrzsrvcc2-tfs02:8080/tfs/CC2DEV/_apis/build/Queues/115"
+      }
+    },
+    "id": 115,
+    "name": "Plant iT base master",
+    "url": "http://hrzsrvcc2-tfs02:8080/tfs/CC2DEV/_apis/build/Queues/115",
+    "pool": {
+      "id": 35,
+      "name": "Plant iT base master"
+    }
+  },
+  "id": 1023,
+  "name": "Plant iT base module TestModule01",
+  "url": "http://hrzsrvcc2-tfs02:8080/tfs/CC2DEV/a868b904-f739-4ac5-b8a5-bb1fe2332168/_apis/build/Definitions/1023?revision=2",
+  "uri": "vstfs:///Build/Definition/1023",
+  "path": "\\Templates",
+  "type": 2,
+  "queueStatus": 0,
+  "revision": 2,
+  "createdDate": "2021-03-18T09:28:11.620Z",
+  "project": {
+    "id": "a868b904-f739-4ac5-b8a5-bb1fe2332168",
+    "name": "Plant iT base",
+    "description": "Teamprojekt für Plant iT base Entwicklung",
+    "url": "http://hrzsrvcc2-tfs02:8080/tfs/CC2DEV/_apis/projects/a868b904-f739-4ac5-b8a5-bb1fe2332168",
+    "state": 1,
+    "revision": 179903,
+    "visibility": 0,
+    "lastUpdateTime": "2021-03-17T09:47:21.380Z"
+  }
+}

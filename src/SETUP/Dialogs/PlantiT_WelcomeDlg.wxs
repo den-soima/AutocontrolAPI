@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) .NET Foundation and contributors. All rights reserved. Licensed under the Microsoft Reciprocal License. See LICENSE.TXT file in the project root for full license information. -->
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Fragment>
+    <UI>
+      <TextStyle Id="WixUI_Font_SmallFooterInfo" FaceName="Tahoma" Size="7" />
+      <Dialog Id="PlantiT_WelcomeDlg" Width="370" Height="270" Title="!(loc.WelcomeDlg_Title)">
+        <Control Id="Next" Type="PushButton" X="236" Y="243" Width="56" Height="17" Default="yes" Text="!(loc.WixUINext)">
+          <Publish Property="WixUI_InstallMode" Value="Update">Installed AND PATCH</Publish>
+        </Control>
+        <Control Id="Cancel" Type="PushButton" X="304" Y="243" Width="56" Height="17" Cancel="yes" Text="!(loc.WixUICancel)">
+          <Publish Event="SpawnDialog" Value="CancelDlg">1</Publish>
+        </Control>
+        <Control Id="Bitmap" Type="Bitmap" X="0" Y="0" Width="370" Height="234" TabSkip="no" Text="!(loc.WelcomeDlgBitmap)" />
+        <Control Id="Back" Type="PushButton" X="180" Y="243" Width="56" Height="17" Disabled="yes" Text="!(loc.WixUIBack)" />
+        <Control Id="BottomLine" Type="Line" X="0" Y="234" Width="370" Height="0" />
+        <Control Id="Description" Type="Text" X="135" Y="80" Width="220" Height="60" Transparent="yes" NoPrefix="yes" Text="!(loc.WelcomeDlgDescription)">
+          <Condition Action="show">NOT Installed OR NOT PATCH</Condition>
+          <Condition Action="hide">Installed AND PATCH</Condition>
+        </Control>
+        <Control Id="PatchDescription" Type="Text" X="135" Y="80" Width="220" Height="60" Transparent="yes" NoPrefix="yes" Text="!(loc.WelcomeUpdateDlgDescriptionUpdate)">
+          <Condition Action="show">Installed AND PATCH</Condition>
+          <Condition Action="hide">NOT Installed OR NOT PATCH</Condition>
+        </Control>
+
+        <!-- - START: ProLeiT spezifische Versions/Buildinformationen, die fuer Produktsupport extrem wichtig sind -->
+        <Control Id="productVersionDesc" Type="Text" X="5" Y="220" Width="260" Height="17" Transparent="yes" NoPrefix="yes" Text="Version: [BUILD_PUBLISHPROP_VERSION_DESCRIPTION]">
+          <Condition Action="show">BUILD_PUBLISHPROP_VERSION_DESCRIPTION</Condition>
+          <Condition Action="hide">NOT BUILD_PUBLISHPROP_VERSION_DESCRIPTION</Condition>
+        </Control>
+        <Control Id="productReleaseStatus" Type="Text" X="5" Y="236" Width="260" Height="17" Transparent="yes" NoPrefix="yes" Text="Release status: [BUILD_PUBLISHPROP_RELEASE_STATUS]">
+          <Condition Action="show">BUILD_PUBLISHPROP_RELEASE_STATUS</Condition>
+          <Condition Action="hide">NOT BUILD_PUBLISHPROP_RELEASE_STATUS</Condition>
+        </Control>
+        <!-- - END: ProLeiT spezifische Versions/Buildinformationen, die fuer Produktsupport extrem wichtig sind -->
+
+        <Control Id="Title" Type="Text" X="135" Y="20" Width="220" Height="60" Transparent="yes" NoPrefix="yes" Text="!(loc.WelcomeDlgTitle)" />
+      </Dialog>
+      <InstallUISequence>
+        <Show Dialog="PlantiT_WelcomeDlg" Before="MaintenanceWelcomeDlg" Overridable="yes">NOT Installed OR PATCH</Show>
+      </InstallUISequence>
+    </UI>
+  </Fragment>
+</Wix>

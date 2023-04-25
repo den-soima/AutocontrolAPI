@@ -1,0 +1,5 @@
+# Add the modules needed by your engineering script here.
+# Multiple modules are separated by a line break. They can be listed in arbitrary order.
+# Example: Uncomment the following two lines to add dependencies to UserMgmt and ConfigMgmt.
+# UserMgmt
+# ConfigMgmt

@@ -1,0 +1,38 @@
+﻿{
+  "ModuleSpecific": [
+    {
+      "Name": "TestModule01",
+      "ServiceSpecific": [
+        {
+          "Name": "TestService01",
+          "General": {
+            "Identifier": null,
+            "ConnectionString": "2EsW7vZc07nPCUJZBzzJGcecqkj5rGBZwQ0jcqqhCG3tK5tB9E9S1w2EEdr/5L2zm89/3ihvo/siKHi1U7mHBb3q7QJ2Bpb4Ze+9aZ89VEvvgxUVXZFsfsdiVkbPyOIqTEtEOFqZs77+QBJrfKvLJ/+zLBfnnqYwsNyoa+lTC2d9pjT2jTKav5IVgWPWAYLq8f3LDpHCvi8BfWpkLyRfCw==",
+            "WriteDate": "2023-03-27T13:51:54.6314934+02:00"
+          },
+          "Entries": [
+            {
+              "Identifier": "clear",
+              "ConnectionString": "2EsW7vZc07nPCUJZBzzJGcecqkj5rGBZwQ0jcqqhCG3tK5tB9E9S1w2EEdr/5L2zm89/3ihvo/siKHi1U7mHBb3q7QJ2Bpb4Ze+9aZ89VEvvgxUVXZFsfsdiVkbPyOIqTEtEOFqZs77+QBJrfKvLJ/+zLBfnnqYwsNyoa+lTC2d9pjT2jTKav5IVgWPWAYLq8f3LDpHCvi8BfWpkLyRfCw==",
+              "WriteDate": "2023-03-27T14:43:50.9965931+02:00"
+            },
+            {
+              "Identifier": "MasterData",
+              "ConnectionString": "2EsW7vZc07nPCUJZBzzJGcecqkj5rGBZwQ0jcqqhCG3tK5tB9E9S1w2EEdr/5L2zm89/3ihvo/siKHi1U7mHBb3q7QJ2Bpb4Ze+9aZ89VEvvgxUVXZFsfsdiVkbPyOIqTEtEOFqZs77+QBJrfKvLJ/+zLBfnnqYwsNyoa+lTC2d9pjT2jTKav5IVgWPWAYLq8f3LDpHCvi8BfWpkLyRfCw==",
+              "WriteDate": "2023-03-27T14:45:16.39351+02:00"
+            }
+          ]
+        }
+      ],
+      "General": null,
+      "Entries": []
+    }
+  ],
+  "StoragePath": null,
+  "General": {
+    "Identifier": null,
+    "ConnectionString": "NtqQ456TCCAN86igRu3qzgW3wLNZ8gGG+AVMdDm0EpsyWESSCDOA3rJZVtHEIBKguq38fI8P6ltfviXkQjRMYcu0Yae+cd/r0NpOtWMUPt2h7FRBIbs9Qsv3jzTfERSrwUlM4weAozC2HYxRK8uOjOgPsH6kxgpSpov3Df0d3eFUEZoDsYHpttL7uam4hytYYlUK5qz31k/hUW75ekY1tUzjwnofv8smHeSFM5TuFpY=",
+    "WriteDate": "2023-03-26T19:00:09.3528494+02:00"
+  },
+  "Entries": []
+}

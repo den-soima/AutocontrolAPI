@@ -1,0 +1,35 @@
+﻿{
+  "ModuleSpecific": [
+    {
+      "Name": "YourModuleName",
+      "ServiceSpecific": [
+        {
+          "Name": "YourServiceName",
+          "General": null,
+          "Entries": []
+        }
+      ],
+      "General": null,
+      "Entries": []
+    },
+    {
+      "Name": "TestModule01",
+      "ServiceSpecific": [
+        {
+          "Name": "TestService01",
+          "General": {
+            "Identifier": null,
+            "ConnectionString": "2EsW7vZc07nPCUJZBzzJGcecqkj5rGBZwQ0jcqqhCG0/zJS+EMsMfzsGturTGvClCk2A2ZmCF8qL/HD+/SE6lgVJuVoDsVa075h3pfBOi7eRd8THCWNRYkIWiFtJSRSD81J/H7T44kkg81DGZmHj1/os6erL4K8ymDiNEEly0VMVe50srJRa3UW6FxAL+IaeE6hWB65OV+wAGYp8UwWjjg==",
+            "WriteDate": "2023-03-28T01:59:48.1172599+02:00"
+          },
+          "Entries": []
+        }
+      ],
+      "General": null,
+      "Entries": []
+    }
+  ],
+  "StoragePath": null,
+  "General": null,
+  "Entries": []
+}

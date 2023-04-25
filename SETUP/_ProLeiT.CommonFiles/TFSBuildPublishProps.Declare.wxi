@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- ======================================================================================= -->
+<!-- ======================================================================================= -->
+<!-- ======================================================================================= -->
+<!-- - DECLARE PUBLIC/PUBLISH PROPERTIES FROM TFS-BUILD: Publish Version, Buildnummer, Release -->
+<!-- ======================================================================================= -->
+<!-- ======================================================================================= -->
+<!-- ======================================================================================= -->
+<Include>
+  <!-- ======================================================================================= -->
+  <!-- PART I: TFS-Build and Release infos -->
+  <!-- ======================================================================================= -->
+  <?ifdef env.PUBLISHPROP_BUILD_DATE ?>
+  <Property Id="BUILD_PUBLISHPROP_BUILD_DATE" Value="$(env.PUBLISHPROP_BUILD_DATE)" Secure="yes" />
+  <?else ?>
+  <Property Id="BUILD_PUBLISHPROP_BUILD_DATE" Secure="yes" />
+  <?endif ?>
+
+  <?ifdef env.PUBLISHPROP_BUILD_ID ?>
+  <Property Id="BUILD_PUBLISHPROP_BUILD_ID" Value="$(env.PUBLISHPROP_BUILD_ID)" Secure="yes" />
+  <?else ?>
+  <Property Id="BUILD_PUBLISHPROP_BUILD_ID" Value = "DEVELOPER LOCAL BUILD" Secure="yes" />
+  <!--"(BuildNumber).(SourceVersion).(BuildId), Branch[NAME]"-->
+  <?endif ?>
+
+  <?ifdef env.PUBLISHPROP_BUILD_TIME ?>
+  <Property Id="BUILD_PUBLISHPROP_BUILD_TIME" Value="$(env.PUBLISHPROP_BUILD_TIME)" Secure="yes" />
+  <?else ?>
+  <Property Id="BUILD_PUBLISHPROP_BUILD_TIME" Secure="yes" />
+  <?endif ?>
+
+  <?ifdef env.PUBLISHPROP_PRODUCT_NAME ?>
+  <Property Id="BUILD_PUBLISHPROP_PRODUCT_NAME" Value="$(env.PUBLISHPROP_PRODUCT_NAME)" Secure="yes" />
+  <?else ?>
+  <Property Id="BUILD_PUBLISHPROP_PRODUCT_NAME" Secure="yes" />
+  <?endif ?>
+
+  <?ifdef env.PUBLISHPROP_PRODUCT_PART_NAME ?>
+  <Property Id="BUILD_PUBLISHPROP_PRODUCT_PART_NAME" Value="$(env.PUBLISHPROP_PRODUCT_PART_NAME)" Secure="yes" />
+  <?else ?>
+  <Property Id="BUILD_PUBLISHPROP_PRODUCT_PART_NAME" Secure="yes" />
+  <?endif ?>
+
+  <?ifdef env.PUBLISHPROP_RELEASE_DATE ?>
+  <Property Id="BUILD_PUBLISHPROP_RELEASE_DATE" Value="$(env.PUBLISHPROP_RELEASE_DATE)" Secure="yes" />
+  <?else ?>
+  <Property Id="BUILD_PUBLISHPROP_RELEASE_DATE" Secure="yes" />
+  <?endif ?>
+
+  <?ifdef env.PUBLISHPROP_RELEASE_NUMBER ?>
+  <Property Id="BUILD_PUBLISHPROP_RELEASE_NUMBER" Value="$(env.PUBLISHPROP_RELEASE_NUMBER)" Secure="yes" />
+  <?else ?>
+  <Property Id="BUILD_PUBLISHPROP_RELEASE_NUMBER" Secure="yes" />
+  <?endif ?>
+
+  <?ifdef env.PUBLISHPROP_RELEASE_STATUS ?>
+  <Property Id="BUILD_PUBLISHPROP_RELEASE_STATUS" Value="$(env.PUBLISHPROP_RELEASE_STATUS)" Secure="yes" />
+  <?else ?>
+  <Property Id="BUILD_PUBLISHPROP_RELEASE_STATUS" Value="LOCALDEV" Secure="yes" />
+  <?endif ?>
+
+  <!-- ======================================================================================= -->
+  <!-- PART II: TFS-Product version infos -->
+  <!-- ======================================================================================= -->
+  <?ifdef env.PUBLISHPROP_VERSION_DESCRIPTION ?>
+  <Property Id="BUILD_PUBLISHPROP_VERSION_DESCRIPTION" Value="$(env.PUBLISHPROP_VERSION_DESCRIPTION)" Secure="yes" />
+  <?else ?>
+  <Property Id="BUILD_PUBLISHPROP_VERSION_DESCRIPTION" Secure="yes" />
+  <!--"V0.00 CU00, Release 2000-01-01"-->
+  <?endif ?>
+
+  <?ifdef env.PUBLISHPROP_VERSION_KEYDESC ?>
+  <Property Id="BUILD_PUBLISHPROP_VERSION_KEYDESC" Value="$(env.PUBLISHPROP_VERSION_KEYDESC)" Secure="yes" />
+  <?else ?>
+  <Property Id="BUILD_PUBLISHPROP_VERSION_KEYDESC" Secure="yes" />
+  <!--"V0.00 CU00"-->
+  <?endif ?>
+
+  <?ifdef env.PUBLISHPROP_VERSION_CURRENTVERSION ?>
+  <Property Id="BUILD_PUBLISHPROP_VERSION_CURRENTVERSION" Value="$(env.PUBLISHPROP_VERSION_CURRENTVERSION)" Secure="yes" />
+  <?else ?>
+  <Property Id="BUILD_PUBLISHPROP_VERSION_CURRENTVERSION" Value="0.1.2.3" Secure="yes" />
+  <!--Beispiel: "9.60.4.1" steht fuer Produktversion 9.60, CU4 Revision 1-->
+  <?endif ?>
+
+  <?ifdef env.PUBLISHPROP_VERSION_NUMBER ?>
+  <Property Id="BUILD_PUBLISHPROP_VERSION_NUMBER" Value="$(env.PUBLISHPROP_VERSION_NUMBER)" Secure="yes" />
+  <?else ?>
+  <Property Id="BUILD_PUBLISHPROP_VERSION_NUMBER" Value="0.1" Secure="yes" />
+  <?endif ?>
+
+  <?ifdef env.PUBLISHPROP_VERSION_NAME ?>
+  <Property Id="BUILD_PUBLISHPROP_VERSION_NAME" Value="$(env.PUBLISHPROP_VERSION_NAME)" Secure="yes" />
+  <?else ?>
+  <Property Id="BUILD_PUBLISHPROP_VERSION_NAME" Secure="yes" />
+  <?endif ?>
+
+  <?ifdef env.PUBLISHPROP_VERSION_KEYTEXT ?>
+  <Property Id="BUILD_PUBLISHPROP_VERSION_KEYTEXT" Value="$(env.PUBLISHPROP_VERSION_KEYTEXT)" Secure="yes" />
+  <?else ?>
+  <Property Id="BUILD_PUBLISHPROP_VERSION_KEYTEXT" Secure="yes" />
+  <?endif ?>
+
+  <?ifdef env.PUBLISHPROP_VERSION_UPDATENUMBER ?>
+  <Property Id="BUILD_PUBLISHPROP_VERSION_UPDATENUMBER" Value="$(env.PUBLISHPROP_VERSION_UPDATENUMBER)" Secure="yes" />
+  <?else ?>
+  <Property Id="BUILD_PUBLISHPROP_VERSION_UPDATENUMBER" Secure="yes" />
+  <?endif ?>
+
+  <?ifdef env.PUBLISHPROP_VERSION_UPDATEREVISION ?>
+  <Property Id="BUILD_PUBLISHPROP_VERSION_UPDATEREVISION" Value="$(env.PUBLISHPROP_VERSION_UPDATEREVISION)" Secure="yes" />
+  <?else ?>
+  <Property Id="BUILD_PUBLISHPROP_VERSION_UPDATEREVISION" Secure="yes" />
+  <?endif ?>
+
+  <?ifdef env.PUBLISHPROP_VERSION_UPDATEDATE ?>
+  <Property Id="BUILD_PUBLISHPROP_VERSION_UPDATEDATE" Value="$(env.PUBLISHPROP_VERSION_UPDATEDATE)" Secure="yes" />
+  <?else ?>
+  <Property Id="BUILD_PUBLISHPROP_VERSION_UPDATEDATE" Secure="yes" />
+  <?endif ?>
+
+  <?ifdef env.PUBLISHPROP_VERSION_UPDATELEVEL ?>
+  <Property Id="BUILD_PUBLISHPROP_VERSION_UPDATELEVEL" Value="$(env.PUBLISHPROP_VERSION_UPDATELEVEL)" Secure="yes" />
+  <?else ?>
+  <Property Id="BUILD_PUBLISHPROP_VERSION_UPDATELEVEL" Secure="yes" />
+  <!--z.B. "CU2"-->
+  <?endif ?>
+
+</Include>

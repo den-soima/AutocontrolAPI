@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Fragment>
+    <!-- =======================================================================================  -->
+    <!-- FILE CONFIG COMPONENT GROURS: Well known static files -->
+    <!-- This are config files with KeyPath="no" which are not overwritten by update if available -->
+    <!-- file is updated by user                                                                  -->
+    <!-- !!! VERY IMPORTANT !!!: EXTREM WICHTIGE ENTSCHEIDUNG FUER CONFIG-FILES !!!
+             - Nutze KeyPath="no".
+             - Setze einmalig eine GUID für ein ConfigFile fest die sich NIE ändern darf.
+             - Nutze Permament="yes"
+             - Nutze NeverOverwrite="yes"
+    -->
+    <!-- =======================================================================================  -->
+
+    <ComponentGroup Id="cgrp_File_TestService01Config" Directory="dir_PROJECT_CONFIG_DIR_FOR_MODULE">
+      <Component Id="CMP_TestService01Config" Guid="6E09C027-6FDC-4C22-9C44-8DCEC56BC6F4" Permanent="yes" NeverOverwrite="yes">
+        <File Id="FILE_TestService01Config"  Source="$(var.DropFolderModuleConfiguration)\TestService01.Config.json" KeyPath="no" />
+      </Component>
+    </ComponentGroup>
+    
+    <ComponentGroup Id="cgrp_File_TestService01WebappConfig" Directory="dir_PROJECT_CONFIG_DIR_FOR_MODULE">
+      <Component Id="CMP_TestService01WebappConfig" Guid="CA0B393C-06A6-4B4B-AD3E-4FCA9230C327" Permanent="yes" NeverOverwrite="yes">
+        <File Id="FILE_TestService01WebappConfig"  Source="$(var.DropFolderModuleConfiguration)\TestService01.webapp.config.json" KeyPath="no" />
+      </Component>
+    </ComponentGroup>
+    
+	</Fragment>
+</Wix>

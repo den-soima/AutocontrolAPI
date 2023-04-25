@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+
+  <!-- ======================================================================================= --><!--
+  --><!-- ======================================================================================= --><!--
+  --><!-- ======================================================================================= --><!--
+  --><!-- https://www.firegiant.com/wix/tutorial/upgrades-and-modularization/checking-for-oldies/ --><!--
+  --><!-- ======================================================================================= --><!--
+  --><!-- - IMPORTANT: Change ALL Guids in this section for each new setup --><!--
+  --><!-- ======================================================================================= --><!--
+  --><!-- <?define ProductId   = "YOUR-GUID-4C29-BE52-CD987D61EFD6"?> --><!--
+  <?define ProductId   = "*"?>
+  <?define PackageId   = "*"?>
+  <?define UpgradeCode = "UpdateCodeGUID"?>
+  <?define UpgradeId   = "UpdateIdGUID"?>
+  <?define Manufacturer = "ProLeiT"?>
+  <?define ModuleTechName = "TestModule01"?>
+  <?define ProductName = "Plant iT base module TestModule01"?>
+  
+
+  --><!-- ======================================================================================= --><!--
+  --><!-- Konstanten zu Herrsteller und Product, die als Vorgaben fuer Pfade und Registry Key genutzt werden --><!--
+  --><!-- Diese bleiben fuer alle Setups rund um Plant iT infra und Module gleich --><!--
+  --><!-- ======================================================================================= --><!--
+  <?define ManufacturerRootFolder = "ProLeiT"?>
+  <?define ManufacturerRegRoot = "ProLeiT"?>
+  <?define ProductRootFolder = "Plant iT base"?>
+  <?define ProductRegRoot = "Plant iT base"?>
+  --><!-- ======================================================================================= --><!--
+  --><!-- ======================================================================================= --><!--
+  --><!-- ======================================================================================= --><!--
+
+  <?ifdef env.PUBLISHPROP_VERSION_CURRENTVERSION ?>
+  --><!-- - BUILD über TFS bekommt immer CURRENTVERSION als Setupversion und kann so an Kunden ausgeliefert werden. Damit geht Produktversion, CU-Number und CU-Revision aus Setupversion hervor. --><!--
+  <?define ProductSetupVersion="$(env.PUBLISHPROP_VERSION_CURRENTVERSION)"?>
+  <?else ?>
+  --><!-- - BUILD auf DEV-Computer bekommt immer fix "1.0.0.0" als Setupversion und darf so NIE an Kunden ausgeliefert werden, nur DEV-Tests in lokale Umgebung sind damit zulässig --><!--
+  <?define ProductSetupVersion="1.0.0.0"?>
+  <?endif ?>-->
+
+  <!-- ======================================================================================= -->
+  <!-- ======================================================================================= -->
+  <!-- ======================================================================================= -->
+  <?include $(sys.CURRENTDIR)\Product.wxi ?>
+  <!-- ======================================================================================= -->
+
+  <Product Id="$(var.ProductId)"
+             Name="$(var.ProductSetupName)"
+             Language="1033"
+             Codepage="1252"
+             Version="$(var.ProductSetupVersion)"
+             Manufacturer="$(var.Manufacturer)"
+             UpgradeCode="$(var.UpgradeCode)">
+
+    <Package Id="$(var.PackageId)"
+             Platform ="x64"
+             Manufacturer="$(var.Manufacturer)"
+             Description="Plant iT base module $(var.ProductModuleIdentName) components"
+             InstallerVersion="500"
+             Compressed="yes"
+             InstallScope="perMachine"
+             InstallPrivileges="elevated"/>
+
+    <!-- ======================================================================================= -->
+    <!-- ======================================================================================= -->
+
+    <!-- <Property Id="MSIUSEREALADMINDETECTION" Value="1" /> -->
+    <MediaTemplate EmbedCab="yes" CompressionLevel="high"/>
+    <Icon Id="ProductIcon4Windows" SourceFile=".\favicon.ico"/>
+    <Property Id="ARPPRODUCTICON" Value="ProductIcon4Windows" />
+
+
+    <!--
+          - RELEVANTE INFO: http://www.nichesoftware.co.nz/2008/09/12/upgradable-msi-installations-with-wix.html
+            HILFREICHE MINI INFO: https://code-examples.net/en/q/1bdf5
+        -->
+    <Upgrade Id="$(var.UpgradeCode)">
+      <!-- Detect any newer version of this product: $(var.ProductSetupVersion) -->
+      <UpgradeVersion Minimum="$(var.ProductSetupVersion)"
+                      IncludeMinimum="no"
+                      OnlyDetect="yes"
+                      Language="1033"
+                      Property="NEWPRODUCTFOUND"/>
+      <!-- Detect and remove ANY older version of this product: $(var.ProductSetupVersion). Max:=255.255 are maximal numeric values for Major/Minor -->
+      <UpgradeVersion Maximum="255.255.0.0"
+                      IncludeMaximum="yes"
+                      OnlyDetect="no"
+                      Language="1033"
+                      Property="OLDPRODUCTFOUND"
+                      IgnoreRemoveFailure="yes"
+                      RemoveFeatures="ALL" />
+    </Upgrade>
+
+    <!-- ======================================================================================= -->
+    <!-- Read from registry if PlantiT base infra is installed -->
+    <!-- IMPORTANT: Registry key must have a value, else RegistrySearch will return false -->
+    <!-- ======================================================================================= -->
+    <Property Id="PLANTIT_BASEINFRA_INSTALL">
+      <RegistrySearch Id='regsearch_PLANTIT_BASEINFRA_INSTALL'
+                      Type='raw'
+                      Root='HKLM'
+                      Key='SOFTWARE\$(var.PiTBaseInfraRegRoot)'
+                      Name='Installed' />
+    </Property>
+
+    <Condition Message='!(loc.Abort_Installation_Base_Notinstalled)'><![CDATA[Installed OR PLANTIT_BASEINFRA_INSTALL = "#1"]]></Condition>
+
+    <!-- ======================================================================================= -->
+    <!-- ======================================================================================= -->
+    <!-- ======================================================================================= -->
+    <!-- - DECLARE PUBLIC/PUBLISH PROPERTIES FROM TFS-BUILD: Publish Version, Buildnummer, Release -->
+    <!-- ======================================================================================= -->
+    <!-- ======================================================================================= -->
+    <!-- ======================================================================================= -->
+    <?include $(sys.CURRENTDIR)\_ProLeiT.CommonFiles\TFSBuildPublishProps.Declare.wxi ?>
+    <!-- ======================================================================================= -->
+    <!-- ======================================================================================= -->
+    
+
+    <!-- ======================================================================================= -->
+    <!-- ======================================================================================= -->
+    <!-- - Declare Common <Custom Actions> for all Proleit modern Setups und InstallExecuteSequence -->
+    <!-- ======================================================================================= -->
+    <!-- ======================================================================================= -->
+    <CustomAction Id="CopyLogFileToCompanyDefaultSetupLogDirOnSuccess" Execute="immediate"
+                  ExeCommand="cmd /c copy &quot;[MsiLogFileLocation]&quot; &quot;[DIR_COMPANY_SETUPLOG_DATA]\$(var.ProductSetupFileShortName).SUCCESS.log&quot;"
+                  Directory="TARGETDIR"
+                  Impersonate="no"
+                  Return="asyncNoWait"/>
+    <CustomAction Id="CopyLogFileCompanyDefaultSetupLogDirOnFailure" Execute="immediate"
+                  ExeCommand="cmd /c copy &quot;[MsiLogFileLocation]&quot; &quot;[DIR_COMPANY_SETUPLOG_DATA]\$(var.ProductSetupFileShortName).ERROR.log&quot;"
+                  Directory="TARGETDIR"
+                  Impersonate="no"
+                  Return="asyncNoWait"/>
+    <CustomAction Id="CopyLogCompanyDefaultSetupLogDirFileOnCancel" Execute="immediate"
+                  ExeCommand="cmd /c copy &quot;[MsiLogFileLocation]&quot; &quot;[DIR_COMPANY_SETUPLOG_DATA]\$(var.ProductSetupFileShortName).CANCEL.log&quot;"
+                  Directory="TARGETDIR"
+                  Impersonate="no"
+                  Return="asyncNoWait"/>
+
+    <SetDirectory Id="WINDOWSVOLUME" Value="[WindowsVolume]"/>
+
+    <!-- ======================================================================================= -->
+    <!-- ======================================================================================= -->
+    <!-- Logging -->
+    <!-- ======================================================================================= -->
+    <!--   https://support.microsoft.com/de-de/help/223300/how-to-enable-windows-installer-logging -->
+    <!-- - DETAILS: -->
+    <!--   0) https://docs.microsoft.com/de-de/windows/desktop/Msi/msilogging -->
+    <!--   1) https://stackoverflow.com/questions/38249881/wix-toolset-default-logging-file-location -->
+    <!--   2) https://blogs.technet.microsoft.com/richard_macdonald/2007/04/02/how-to-interpret-windows-installer-logs/-->
+    <Property Id="MsiLogging" Value="voicewarmup!"/>
+    
+    <!-- ======================================================================================= -->
+    <!-- ======================================================================================= -->
+    <!-- - Declare "PreventDowngrading" Custom Actions: almost all ProLeiT modern setup shoud    -->
+    <!--   use same "ForceUpgrade"/"PreventDowngrade" pattern to deploy software.   -->
+    <!-- ======================================================================================= -->
+    <!-- ======================================================================================= -->
+    <CustomAction Id="PreventDowngrading"
+                  Error="A newer version of [ProductName] is already installed."/>
+    
+    <!-- ======================================================================================= -->
+    <!-- ======================================================================================= -->
+    <!-- - InstallUISequence for this setup -->
+    <!--   Sequence contains: -->
+    <!--    a) Setup specific custom actions ("none" at the moment) -->
+    <!--    b) ProLeiT "best practice" custom actions for "ForceUpgrade"/"PreventDowngrade" pattern -->
+    <!--    c) Setup specific custom actions -->
+    <!-- ======================================================================================= -->
+    <!-- ======================================================================================= -->
+    <InstallUISequence>
+      <!-- a) ProLeiT "best practice" custom actions for "ForceUpgrade"/"PreventDowngrade" pattern -->
+      <!-- Prevent downgrading -->
+      <Custom Action="PreventDowngrading"   After="FindRelatedProducts">NEWPRODUCTFOUND</Custom>
+    </InstallUISequence>
+
+    <!-- ======================================================================================= -->
+    <!-- ======================================================================================= -->
+    <!-- - InstallExecuteSequence for this setup -->
+    <!--   Sequence contains: -->
+    <!--    a) ProLeiT "best practice" custom actions for "ForceUpgrade"/"PreventDowngrade" pattern -->
+    <!--    b) ProLeiT common custom actions (CopyLogCompanyDefaultSetupLogDirxyz") -->
+    <!--    c) Setup specific custom actions -->
+    <!-- ======================================================================================= -->
+    <!-- ======================================================================================= -->
+    <InstallExecuteSequence>
+      <!-- a) ProLeiT "best practice" custom actions for "ForceUpgrade"/"PreventDowngrade" pattern -->
+      <!-- Prevent downgrading -->
+      <Custom Action="PreventDowngrading"  After="FindRelatedProducts">NEWPRODUCTFOUND</Custom>
+      <RemoveExistingProducts After="InstallInitialize" />
+      <CreateFolders/>
+      <!-- b) ProLeiT common custom actions (CopyLogCompanyDefaultSetupLogDirxyz") -->
+      <Custom Action="CopyLogFileToCompanyDefaultSetupLogDirOnSuccess" OnExit="success"/>
+      <Custom Action="CopyLogFileCompanyDefaultSetupLogDirOnFailure" OnExit="error"/>
+      <Custom Action="CopyLogCompanyDefaultSetupLogDirFileOnCancel" OnExit="cancel"/>
+
+      <!-- c) Put setup specific CAs here... -->
+    </InstallExecuteSequence>
+      
+    
+    <!-- ======================================================================================= -->
+    <!-- ======================================================================================= -->
+
+    <!-- Prevent "Modify"-Button in installer -->
+    <!-- <Property Id="ARPNOMODIFY" Value="yes" Secure="yes" /> -->
+    <!-- Diese Propertyzuweisung ist nicht notwendig wegen Nutzung von WixUI_Minimal -->
+
+    <!-- ======================================================================================= -->
+    <!-- ======================================================================================= -->
+    <!-- READ: Common-Registry-Properties - sind für alle ProLeiT-Setups gleich -->
+    <!--       Irgendein Setup koennte sie bereits angelegt haben. -->
+    <!-- - Hier werden sie NICHT geschrieben, weil diese MSI ein Teilsetup für übergeordnetes ist. -->
+    <!-- ======================================================================================= -->
+
+    <!-- - Gemeinsamen Pfad fuer DIR_COMPANY_SETUPDATAROOT (gilt fuer alle ProLeiT - Setups).
+           Daraus werden Pfade fuer DIR_COMPANY_SETUPDB_DATA und DIR_COMPANY_SETUPLOG_DATA abgeleitet
+    -->
+    <Property Id="DIR_COMPANY_SETUPDATAROOT" Secure="yes">
+      <RegistrySearch Id="regsearch_common_DIR_COMPANY_SETUPDATAROOT"
+            Type="directory"
+            Root="HKLM"
+            Win64="yes"
+            Key="SOFTWARE\$(var.ManufacturerRegRoot)"
+            Name="DefaultSetupDataPath">
+      </RegistrySearch>
+    </Property>
+
+    <!-- - CompanyInstallPath: Vorschlag für eigene Installpfade (always read from registry) -->
+    <Property Id="DIR_COMPANYINSTALLROOT">
+      <RegistrySearch Id='regsearch_common_DIR_COMPANYINSTALLROOT'
+             Type='directory'
+             Root='HKLM'
+             Win64="yes"
+             Key='SOFTWARE\$(var.ManufacturerRegRoot)'
+             Name='CompanyInstallRoot' />
+    </Property>
+
+    <!-- ======================================================================================= -->
+    <!-- ======================================================================================= -->
+    <!-- READ: Registry-Properties from "Plant iT base preset" install -->
+    <!-- ======================================================================================= -->
+
+    <!--Installationspath (base): always read from registry -->
+    <Property Id="DIR_BASEINSTALLROOT">
+      <RegistrySearch Id='regsearch_DIR_BASEINSTALLROOT'
+                      Type='directory'
+                      Root='HKLM'
+                      Win64='yes'
+                      Key='SOFTWARE\$(var.ManufacturerRegRoot)\$(var.ProductRegRoot)'
+                      Name='InstallPath' />
+    </Property>
+
+    <!--Projektpfad "C:\ProLeiT\Plant iT base\" -->
+    <Property Id="DIR_BASEPROJECTROOT">
+      <RegistrySearch Id='regsearch_DIR_BASEPROJECTROOT'
+                      Type='directory'
+                      Root='HKLM'
+                      Win64='yes'
+                      Key='SOFTWARE\$(var.ManufacturerRegRoot)\$(var.ProductRegRoot)'
+                      Name='ProjectPath' />
+    </Property>
+
+    <Property Id='DIR_COMMON_DEFAULT_PITWEBPUBROOT'>
+      <RegistrySearch Id='regsearch_common_DIR_COMMON_DEFAULT_PITWEBPUBROOT'
+                      Type='directory'
+                      Root='HKLM'
+                      Win64='yes'
+                      Key='SOFTWARE\$(var.ManufacturerRegRoot)'
+                      Name='DefaultPiTWebPubPath'/>
+    </Property>
+
+    <!-- ======================================================================================= -->
+    <!-- QUELLE: http://wixtoolset.org/documentation/manual/v3/wixui/wixui_customizations.html -->
+    <!-- ======================================================================================= -->
+    <!-- EULA agreement (for local/test build only) -->
+    <!-- <WixVariable Id="WixUILicenseRtf" Value="Resources\License_en-US.rtf" /> -->
+
+    <!-- Installer images -->
+    <!-- ARJ 2018-02-20: auskommentiert, weil Bild mit WiXUI_FeatureTree schlecht harmoniert (ueberdeckt Lizenztext) -->
+    <WixVariable Id="WixUIDialogBmp" Value="Resources\PRODUCT_SPLASH.BMP" />
+    <WixVariable Id="WixUIBannerBmp" Value="Resources\PLANT_IT_BASE_LINE.BMP" />
+
+    <!-- ======================================================================================= -->
+    <Property Id="WIXUI_INSTALLDIR" Value="DIR_BASEINSTALLROOT" />
+    <!-- WiXUI_Minimal needs WIXUI_INSTALLDIR property -->
+    <UIRef Id="WixUI_Mondo_Custom" />
+
+    <!-- Require administrator priveleges -->
+    <Condition Message="You need to be an administrator to install this product.">Privileged</Condition>
+
+    <!-- ======================================================================================= -->
+    <!-- ======================================================================================= -->
+    <Feature Id="F_BASEINSTALLROOT" Title="Programmdateien" ConfigurableDirectory="DIR_BASEINSTALLROOT" Absent="disallow" AllowAdvertise="no">
+      <ComponentGroupRef Id="cgrp_Files_Binaries"/>
+      <ComponentGroupRef Id="cgrp_Set_PSModule_Path"/>
+      
+      
+      <ComponentGroupRef Id="cgrp_Files_TestService01Frontend"/>
+	  <ComponentGroupRef Id ="cgrp_File_TestService01WebappConfig"/>
+      
+      <ComponentGroupRef Id ="cgrp_File_TestService01Config"/>
+      <ComponentGroupRef Id ="cgrp_Files_TemplateInstalledModules"/>
+      <ComponentGroupRef Id ="cgrp_Files_ConfigFileBackup"/>
+      <ComponentGroupRef Id="cgrp_Files_ProjectInstalledModules"/>
+      <ComponentGroupRef Id="cgrp_Files_Engineeringscripts"/>
+      <ComponentGroupRef Id="cgrp_Registry_SetupSettings"/>
+      <ComponentGroupRef Id="cgrp_Registry_Build_CurrentVersion"/>
+    </Feature>
+  </Product>
+
+
+</Wix>
