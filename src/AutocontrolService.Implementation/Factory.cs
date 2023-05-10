@@ -52,10 +52,10 @@ namespace AutocontrolService.Implementation
             //Uncomment the following block, once you need a private database for your service.
             //MyDbContext is a placeholder for your context name!
 
-            settings.DatabaseConnectionString = "Server=ESBSJUM50\\PLANTIT;Database=dbIdc;User Id=sa; Password=ProAdmin777;";
+            settings.DatabaseConnectionString = "Server=ESBSJUM50\\PLANTIT;Database=dbIdc;User Id=sa; Password=ProAdmin777;Connection Timeout=300000";
 
              
-            var dbContextOptionsBuilder = new DbContextOptionsBuilder<AutocontrolContext>();
+            var dbContextOptionsBuilder = new DbContextOptionsBuilder<LmsContext>();
             dbContextOptionsBuilder.UseSqlServer(settings.DatabaseConnectionString);
             //services.AddSingleton(myDbContextOptions.Options);
             //services.AddTransient<MyDbContext>();
@@ -109,6 +109,7 @@ namespace AutocontrolService.Implementation
             {
                 yield return new ControllerDocumentation(typeof(GuestsController));
                 yield return new ControllerDocumentation(typeof(AutocontrolController));
+                yield return new ControllerDocumentation(typeof(DashboardController));
                 yield return new ControllerDocumentation(typeof(ReportController));
                 yield return new ControllerDocumentation(typeof(AccessingForeignModuleServicesExampleController));
                 yield break;

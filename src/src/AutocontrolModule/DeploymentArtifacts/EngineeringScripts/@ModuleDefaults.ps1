@@ -2,7 +2,7 @@
 ######## Default Engineering Script ######## 
 ############################################
 
-$baseModuleTagName="TestModule01"
+$baseModuleTagName="AutocontrolModule"
 $baseProjectPath = (Get-ItemProperty -path "HKLM:\SOFTWARE\ProLeiT\Plant iT base").ProjectPath
 $baseEngineeringPath = $baseProjectPath + "engineering\"
 $baseModuleEngineeringPath = Join-Path $baseEngineeringPath -ChildPath $baseModuleTagName
@@ -23,7 +23,7 @@ foreach($i in $installedSoftwareFiles)
     Import-PiTConfigInstalledSoftware $i.FullName $myFQDN $baseNodePortnumber
 }
 
-## Create policies for the following groups to receive all permissions in this TestModule01 (The group "Administrators" gets all policies automatically)
+## Create policies for the following groups to receive all permissions in this AutocontrolModule (The group "Administrators" gets all policies automatically)
 
 $AdministratorsGuid = "448c6fe7-cc8f-43a7-8e89-346137ced97f"
 $SupervisorsGuid = "52afc690-9cb0-45b5-a0cd-e5d26906c77e"

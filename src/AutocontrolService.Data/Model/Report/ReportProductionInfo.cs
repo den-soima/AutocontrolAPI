@@ -23,9 +23,14 @@ namespace AutocontrolService.Data.Model.Report
         public decimal O2 { get; set; }
         public decimal CO2 { get; set; }
         public decimal AguaBlanda { get; set; }
-        public decimal AguaFría { get; set; }
+        public decimal AguaFria { get; set; }
         public string FormatUnit { get; set; }
         public string CapacityUnit { get; set; }
         public string SKUUnit { get; set; }
+
+        public decimal BBT { get; set; }
+        public decimal Semana { get; set; }
+        public decimal Turno { get; set; }
+
     }
 }

@@ -9,18 +9,18 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AutocontrolService.Data
 {
-    class AutocontrolRepository : IAutocontrolRepository
+    class DashboardRepository : IDashboardRepository
     {
 
         private LmsContext _context;
 
-        public AutocontrolRepository(LmsContext context)
+        public DashboardRepository(LmsContext context)
         {
             _context = context;
         }
-        public IQueryable<Autocontrol> GetAll()
+        public IQueryable<Dashboard> GetAll()
         {
-            var value = _context.Autocontrols.FromSqlRaw<Autocontrol>("EXECUTE [zmod].[sp_LmsAutoControlGet]");
+            var value = _context.Dashboard.FromSqlRaw<Dashboard>("EXECUTE [zmod].[sp_LmsDashboardFilling]");
             return value;
         }
 

@@ -12,9 +12,9 @@ namespace AutocontrolService.Data
     class ReportRepository : IReportRepository
     {
 
-        private AutocontrolContext _context;
+        private LmsContext _context;
 
-        public ReportRepository(AutocontrolContext context)
+        public ReportRepository(LmsContext context)
         {
             _context = context;
         }

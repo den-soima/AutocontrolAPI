@@ -14,16 +14,18 @@ namespace AutocontrolService.Data
         public static IServiceCollection AddDatabaseService(this IServiceCollection services, DbContextOptions contextOption)
         {
             services.AddSingleton(contextOption);
+            services.AddTransient<LmsContext>();
             services.AddTransient<IAutocontrolRepository, AutocontrolRepository>();
+            services.AddTransient<IDashboardRepository, DashboardRepository>();
             services.AddTransient<IReportRepository, ReportRepository>();            
-            services.AddTransient<AutocontrolContext>();
+            
 
             return services;
         }
 
         public static void ConfigureDatabase(IApplicationBuilder app)
         {
-            var context = app.ApplicationServices.GetRequiredService<AutocontrolContext>();
+            var context = app.ApplicationServices.GetRequiredService<LmsContext>();
             context.Database.EnsureCreated();
         }
     }

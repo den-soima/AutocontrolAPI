@@ -156,7 +156,7 @@ namespace AutocontrolService.Implementation.Controllers.V1
         /// Get Sate Graph for specific line for lms report.
         /// </summary>
         /// <returns> .</returns>
-        [HttpGet("stateGraph/{nLineLink}")]
+        [HttpGet("statesGraph/{nLineLink}")]
         //[RequiresPermission("Guest","Read")]
         [Produces(typeof(List<ReportStatesGraph>))] // Required for API-Documentation; this way required data structures are also documented.
         public IActionResult GetStateGraph(int nLineLink)

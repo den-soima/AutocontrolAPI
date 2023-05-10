@@ -8,10 +8,10 @@ using AutocontrolService.Data.Model.Report;
 
 namespace AutocontrolService.Data.Services
 {
-    public class AutocontrolContext : DbContext
+    public class LmsContext : DbContext
     {
 
-        public AutocontrolContext(DbContextOptions options) : base(options)
+        public LmsContext(DbContextOptions options) : base(options)
         {
 
         }
@@ -42,8 +42,14 @@ namespace AutocontrolService.Data.Services
             {
                 val.HasNoKey().ToView(null);
             });
+            modelBuilder.Entity<Dashboard>(val =>
+            {
+                val.HasNoKey().ToView(null);
+            });
         }
-        public DbSet<Autocontrol> Autocontrols { get; set; }
+        public DbSet<Autocontrol> Autocontrols { get; set; } 
+
+        public DbSet<Dashboard> Dashboard { get; set; }
         public DbSet<ReportLines> ReportLines { get; set; }
         public DbSet<ReportHeader> ReportHeader { get; set; }
         public DbSet<ReportProductionInfo> ReportProductionInfo { get; set; }

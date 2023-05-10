@@ -186,6 +186,17 @@
             </summary>
             <returns>The entire list of guests who immortalized themselves in this session.</returns>
         </member>
+        <member name="T:AutocontrolService.Implementation.Controllers.V1.DashboardController">
+            <summary>
+            An REST-ful api-controller for storing and retrieving the names of guests who visited this instance.
+            </summary>
+        </member>
+        <member name="M:AutocontrolService.Implementation.Controllers.V1.DashboardController.GetAll">
+            <summary>
+            Gets all entries in the list of guests.
+            </summary>
+            <returns>The entire list of guests who immortalized themselves in this session.</returns>
+        </member>
         <member name="T:AutocontrolService.Implementation.Controllers.V1.GuestsController">
             <summary>
             An REST-ful api-controller for storing and retrieving the names of guests who visited this instance.
