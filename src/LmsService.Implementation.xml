@@ -1,0 +1,258 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LmsService.Implementation</name>
+    </assembly>
+    <members>
+        <member name="T:LmsService.Implementation.Config.ConfigurationConstants">
+            <summary>
+            Defines constants that configure the module/service
+            </summary>
+        </member>
+        <member name="F:LmsService.Implementation.Config.ConfigurationConstants.LmsServiceConfigFileName">
+            <summary>
+            TODO for template-users: a file with the following name must be placed in the config directory of Plant iT base.
+            containing a json structure corresponding to the class hirarchy seen in "Settings.cs". Please
+            refer to the developer manual for more information about this.
+            </summary>
+        </member>
+        <member name="F:LmsService.Implementation.Config.ConfigurationConstants.ModuleIdentifier">
+            <summary>
+            This should be set to the techname of the module.
+            </summary>
+        </member>
+        <member name="F:LmsService.Implementation.Config.ConfigurationConstants.ModuleServiceIdentifier">
+            <summary>
+            Normally, this should be set to the techname of the module-service.
+            Will be used from the StartStopLog-Service which log's when this service starts and stops.
+            </summary>
+        </member>
+        <member name="F:LmsService.Implementation.Config.ConfigurationConstants.ConfigSectionName">
+            <summary>
+            The section name, required for the configuration system to find the 
+            correct object for the name of the object in the configuration file
+            </summary>
+        </member>
+        <member name="T:LmsService.Implementation.Config.LmsServiceConfiguration">
+            <summary>
+            Method-object for loading configuration from different sources like static-files or the command-line.
+            </summary>
+        </member>
+        <member name="P:LmsService.Implementation.Config.LmsServiceConfiguration.ModuleServiceIdentifier">
+            <summary>
+            The Service name of the application (The Logging infrastructure reads this)
+            </summary>
+        </member>
+        <member name="P:LmsService.Implementation.Config.LmsServiceConfiguration.ModuleIdentifier">
+            <summary>
+            The Module name of the application (The Logging infrastructure reads this)
+            </summary>
+        </member>
+        <member name="P:LmsService.Implementation.Config.LmsServiceConfiguration.ConfigSectionName">
+            <summary>
+            The section name, required for the configuration system to find the 
+            correct object for the name of the object in the configuration file
+            </summary>
+        </member>
+        <member name="M:LmsService.Implementation.Config.LmsServiceConfiguration.AddConfigurationFiles(Microsoft.Extensions.Configuration.IConfigurationBuilder,System.String)">
+            <summary>
+            This adds the configuration-file of this Module-Service to the configuration system.
+            </summary>
+            <param name="configurationBuilder">Provides the collection of possible configuration sources.</param>
+            <param name="basePath">Path under which the configuration files can be found.</param>
+        </member>
+        <member name="M:LmsService.Implementation.Config.LmsServiceConfiguration.OnConfigurationFinished">
+            <summary>
+            Displays the current configuration in the log (and console, if used)
+            </summary>
+        </member>
+        <member name="M:LmsService.Implementation.Config.LmsServiceConfiguration.CreateCommandLineArguments(PlantiT.Base.CommandLineUtils.CommandLineParserBuilder{LmsService.Implementation.Config.LmsServiceSettings})">
+            <summary>
+            Used to configure command line arguments.
+            
+            The following arguments are already in use, so use the short or long names in own arguments please:
+            Long-Name               Short-Name 
+            --Port                  -l
+            --projectDirectory      -p 
+            --TlsMode               -s
+            --SslCertThumbprint     -t
+            --UrlPathBase           -u
+            --piTReverseProxyPort   -r
+            --databaseStorageType   -w
+            --databaseServerComputer-x
+            --databaseServerInstance-y
+            --showPII               -z 
+            For descriptions and options of above arguments please refer to the developers-manual.
+            </summary>
+            <param name="parserBuilder">None of your interest.</param>
+        </member>
+        <member name="T:LmsService.Implementation.Config.LmsServiceSettings">
+            <summary>
+            Provides settings for the current Module-Service.
+            Populated with values loaded from static files, command line or presets.
+            </summary>
+        </member>
+        <member name="P:LmsService.Implementation.Config.LmsServiceSettings.ExampleSetting">
+            <summary>Example setting. Should always have a default value. Referenced to from the Configuration class. Can be deleted once understood.</summary>
+        </member>
+        <member name="T:LmsService.Implementation.Controllers.V1.AccessingForeignModuleServicesExampleController">
+            <summary>
+            An REST-ful api-controller for storing and retrieving the names of guests who visited this instance.
+            
+            TODO for template-users: This is an example controller and should be removed once understood!
+            </summary>
+        </member>
+        <member name="M:LmsService.Implementation.Controllers.V1.AccessingForeignModuleServicesExampleController.#ctor(PlantiT.Base.Logging.Abstractions.ILogWriter,PlantiT.Base.HttpClientProvider.IHttpClientProvider)">
+            <summary>
+            Instanciates the controller.
+            </summary>
+            <param name="httpClientProvider">A provider for tokenized http-clients.</param>
+            <param name="log">Required for logging.</param>
+        </member>
+        <member name="M:LmsService.Implementation.Controllers.V1.AccessingForeignModuleServicesExampleController.ExampleAccessOfOtherModuleService">
+            <summary>
+            Example method which shows how to use the httpClientProvider
+            </summary>
+            <returns>Nothing</returns>
+        </member>
+        <member name="T:LmsService.Implementation.Controllers.V1.AutocontrolController">
+            <summary>
+            An REST-ful api-controller for storing and retrieving the names of guests who visited this instance.
+            </summary>
+        </member>
+        <member name="M:LmsService.Implementation.Controllers.V1.AutocontrolController.GetAll">
+            <summary>
+            Gets all entries in the list of guests.
+            </summary>
+            <returns>The entire list of guests who immortalized themselves in this session.</returns>
+        </member>
+        <member name="T:LmsService.Implementation.Controllers.V1.DashboardController">
+            <summary>
+            An REST-ful api-controller for storing and retrieving the names of guests who visited this instance.
+            </summary>
+        </member>
+        <member name="M:LmsService.Implementation.Controllers.V1.DashboardController.GetData">
+            <summary>
+            Gets all entries in the list of guests.
+            </summary>
+            <returns>The entire list of guests who immortalized themselves in this session.</returns>
+        </member>
+        <member name="T:LmsService.Implementation.Controllers.V1.ReportController">
+            <summary>
+            An REST-ful api-controller for storing and retrieving the names of guests who visited this instance.
+            </summary>
+        </member>
+        <member name="M:LmsService.Implementation.Controllers.V1.ReportController.GetLines">
+            <summary>
+            Get all Lines for lms report
+            </summary>
+            <returns> </returns>
+        </member>
+        <member name="M:LmsService.Implementation.Controllers.V1.ReportController.GetHeader(System.Int32)">
+            <summary>
+            Get Header for specific line for lms report.
+            </summary>
+            <returns> .</returns>
+        </member>
+        <member name="M:LmsService.Implementation.Controllers.V1.ReportController.GetProductionInfo(System.Int32)">
+            <summary>
+            Get Production Info for specific line for lms report.
+            </summary>
+            <returns> .</returns>
+        </member>
+        <member name="M:LmsService.Implementation.Controllers.V1.ReportController.GetMachineError(System.Int32)">
+            <summary>
+            Get Machine Error for specific line for lms report.
+            </summary>
+            <returns> .</returns>
+        </member>
+        <member name="M:LmsService.Implementation.Controllers.V1.ReportController.GetMachineError2(System.Int32)">
+            <summary>
+            Get Machine Error 2 for specific line for lms report.
+            </summary>
+            <returns> .</returns>
+        </member>
+        <member name="M:LmsService.Implementation.Controllers.V1.ReportController.GetEfficiency(System.Int32)">
+            <summary>
+            Get Efficiency by Time for specific line for lms report.
+            </summary>
+            <returns> .</returns>
+        </member>
+        <member name="M:LmsService.Implementation.Controllers.V1.ReportController.GetStateGraph(System.Int32)">
+            <summary>
+            Get Sate Graph for specific line for lms report.
+            </summary>
+            <returns> .</returns>
+        </member>
+        <member name="M:LmsService.Implementation.Controllers.V1.ReportController.GetErrorList(System.Int32)">
+            <summary>
+            Get Sate Graph for specific line for lms report.
+            </summary>
+            <returns> .</returns>
+        </member>
+        <member name="T:LmsService.Implementation.Factory">
+             <summary>
+             All public methods in this class are called by the Host-Application at Startup.
+            
+             TODO for template-users: Adapt all methods of this Factory to the needs of your Service.
+             </summary>
+        </member>
+        <member name="M:LmsService.Implementation.Factory.AddLmsServiceServices(Microsoft.Extensions.DependencyInjection.IServiceCollection,LmsService.Implementation.Config.LmsServiceSettings)">
+            <summary>
+            Add all dependency-injection-services ("DI-services") of this module-service
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LmsService.Implementation.Factory.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment,LmsService.Implementation.Config.LmsServiceSettings,PlantiT.Base.Logging.Configuration.LogConfiguration)">
+            <summary>
+            Configurations of the Application itself can be customized here.
+            </summary>
+        </member>
+        <member name="P:LmsService.Implementation.Factory.ControllerDocumentation">
+             <summary>
+             Add each of your controllers here like this:
+             yield return new ControllerDocumentation(typeof(ValuesController));
+            
+             This is required for the included systems "Swashbuckle" and "Swagger".
+             These can generate a human friendly API-specification
+             which can be reviewed at runtime or used for automatic generation
+             of REST-clients.
+            
+             Please refer to the developers-manual for more details.
+             </summary>
+        </member>
+        <member name="P:LmsService.Implementation.Factory.RequireAuthentication">
+            <summary>Set this to true, once secured API's should be accessed (e.g. of other module-services)</summary>
+        </member>
+        <member name="F:LmsService.Implementation.Factory.ScopesSwaggerMustRequest">
+            <summary>
+            The scopes (api-names) which are requested by swagger and are required to access
+            the module-service's endpoints (controllers).
+            </summary>
+        </member>
+        <member name="M:LmsService.Implementation.Factory.AddAuthenticationConfigurations(Microsoft.Extensions.DependencyInjection.IServiceCollection,LmsService.Implementation.Config.LmsServiceSettings)">
+             <summary>
+             Configures the authentication-settings in both directions:
+             - When THIS module-service sends requests to OTHER module-services.
+             - When OTHER module-services send requests to THIS module-service.
+            
+             For the first case:
+               Once you want to access secured API's (e.g. of other module-services)
+               this module service must be registered at IdentityProvider with an Id, a Secret and the Scopes
+               it wants to access. Afterwards, the Settings used in the AddTokenizedHttpClientProvider... should be
+               set according to the credentials which where set at IdentityProvider.
+            
+             For the latter:
+             - the boolean "RequireAuthentication" needs to be set to true
+             - the ApiName of this module-service must be registered at Identity-Provider and
+             - the ApiName needs to be set below at "options.ApiName = PlantiTBase"
+             - all controllers which should receive authenticated requests only must be decorated with the [Authorize] attribute
+             </summary>
+        </member>
+        <member name="M:LmsService.Implementation.Factory.OnShutdown">
+            <summary>
+            Action that will be preformed on graceful shutdown
+            </summary>
+        </member>
+    </members>
+</doc>

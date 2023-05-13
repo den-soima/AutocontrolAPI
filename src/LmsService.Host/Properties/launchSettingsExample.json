@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "LmsService.Host": {
+      "commandName": "Project",
+      "commandLineArgs": "--SslCertThumbprint=\"Please enter SSL-Thumbprint in debug-commandline-arguments!\" --FullyQualifiedDomainName=\"***FQDN in Cmdline-Arguments!***\" --Port=54321 --projectDirectory=\"C:\\PROLEIT\\TestProject\" --UrlPathBase=\"/LmsModule/LmsService\" --piTWebPubPath=\"$(ProjectDir)\\wwwroot\" --piTReverseProxyPort=8777",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:54321/LmsModule/LmsService/swagger"
+    }
+  }
+}

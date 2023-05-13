@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LmsService</name>
+    </assembly>
+    <members>
+        <member name="T:LmsService.Host.Program">
+            <summary>
+            The main program class for starting the module-service. 
+            In most cases, this class does not need to be changed.
+            </summary>
+        </member>
+        <member name="M:LmsService.Host.Program.Main(System.String[])">
+            <summary>
+            Entrance of application control flow.
+            </summary>
+            <param name="args">Arguments provided from the command-line.</param>
+        </member>
+        <member name="M:LmsService.Host.Program.CreateWebHostBuilder(System.String[])">
+            <summary>
+            Helper method for creating a <see cref="T:Microsoft.AspNetCore.Hosting.IWebHostBuilder"/> 
+            </summary>
+            <param name="args">Arguments provided from the command-line.</param>
+            <returns></returns>
+        </member>
+        <member name="T:LmsService.Host.Services.StartStopLog">
+            <summary>
+            Allows the module service to log its own start and stop.
+            Technically, this is realized by creating this service class at startup and disposing it at shut-down.
+            </summary>
+        </member>
+        <member name="M:LmsService.Host.Services.StartStopLog.#ctor(PlantiT.Base.Logging.Abstractions.ILogWriter)">
+            <summary>Initializes this service. Should be called in the ConfigureServices method of the Startup.cs.
+            Writes a startup-event in the log.</summary>
+        </member>
+        <member name="M:LmsService.Host.Services.StartStopLog.Dispose">
+            <summary>Disposes this service. Should be called by Kestrel only. Logs shutdown-event.</summary>
+        </member>
+        <member name="T:LmsService.Host.Startup">
+            <summary>
+            This class is instanciated by the Webhost (Kestrel), which is built and started in Program.cs
+            The webhost uses this object to initialize and configure the services, which it is using at runtime.
+            The dependency-injection pattern is strongly followed here.
+            </summary>
+        </member>
+        <member name="F:LmsService.Host.Startup.configuration">
+            <summary> An <see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/> instance with basic settings provided by the Webhost-Builder (e.g. Environment-Variables) </summary>
+        </member>
+        <member name="F:LmsService.Host.Startup.settings">
+            <summary>The settings for this module-service</summary>
+        </member>
+        <member name="M:LmsService.Host.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary> Creates a new instance of the <see cref="T:LmsService.Host.Startup"/> class. </summary>
+        </member>
+        <member name="M:LmsService.Host.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            This method is called by the webhost.
+            Here, all used singletons and transients should be added to the service-collection.
+            </summary>
+            <param name="services">The Servicecollection to which all services should be added.</param>
+        </member>
+        <member name="M:LmsService.Host.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment,LmsService.Implementation.Config.LmsServiceSettings,PlantiT.Base.Logging.Configuration.LogConfiguration,Microsoft.Extensions.Hosting.IHostApplicationLifetime)">
+            <summary>
+            This method is called by the webhost (after "ConfigureServices(...)").
+            Here, the configurations for the web application itself (like the url)
+            are set.
+            </summary>
+            <param name="app">Provides the mechanisms to configure an application's request pipeline</param>
+            <param name="env">Provides information about the web hosting environment an application is running in.</param>
+            <param name="settings">Provides settings for the current Module-Service</param>
+            <param name="logSettings">The settings for the logging</param>
+            <param name="applicationLifetime">Allows consumers to preform cleanup during a graceful shutdown</param>
+        </member>
+    </members>
+</doc>

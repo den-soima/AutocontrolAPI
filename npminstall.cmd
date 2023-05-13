@@ -1,2 +1,2 @@
-cd ./src/TestService01.Host/ClientApp
+cd ./src/LmsService.Host/ClientApp
 npm install

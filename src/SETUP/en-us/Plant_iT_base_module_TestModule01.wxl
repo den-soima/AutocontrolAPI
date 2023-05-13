@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<WixLocalization Culture="en-us" xmlns="http://schemas.microsoft.com/wix/2006/localization">
-  <String Id="Abort_Installation_Base_Notinstalled" Overridable="yes">Plant iT base infra is not installed. Aborting setup.</String>
-</WixLocalization>
