@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 using Microsoft.EntityFrameworkCore;
-using LmsService.Data.Model;
+using LmsService.Data.Model.Autocontrol;
 using LmsService.Data.Model.Report;
 using LmsService.Data.Model.Dashboard;
 
@@ -52,8 +52,7 @@ namespace LmsService.Data.Services
                 val.HasNoKey().ToView(null);
             });
         }
-        public DbSet<Autocontrol> Autocontrols { get; set; } 
-
+        public DbSet<Autocontrol> Autocontrols { get; set; }
         public DbSet<DashboardData> Dashboard { get; set; }
         public DbSet<DashboardHeader> DashboardHeader { get; set; }
         public DbSet<ReportLines> ReportLines { get; set; }
@@ -64,11 +63,16 @@ namespace LmsService.Data.Services
         public DbSet<ReportStatesGraph> ReportStatesGraph { get; set; }
         public DbSet<ReportEfficiency> ReportEfficiency{ get; set; }
         public DbSet<ReportErrorList> ReportErrorList{ get; set; }
+        public DbSet<AutocontrolField> AutocontrolFields { get; set; }
+        public DbSet<AutocontrolDialog> AutocontrolDialog { get; set; }
+        public DbSet<AutocontrolFieldEnum> AutocontrolFieldEnums { get; set; }
 
 
 
 
 
-        
+
+
+
     }
 }

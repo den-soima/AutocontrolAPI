@@ -15,10 +15,9 @@ namespace LmsService.Data
         {
             services.AddSingleton(contextOption);
             services.AddTransient<LmsContext>();
-            services.AddTransient<IAutocontrolRepository, AutocontrolRepository>();
+            services.AddTransient<IAutocontrolRepository, AutocontrolRepository>();          
             services.AddTransient<IDashboardRepository, DashboardRepository>();
-            services.AddTransient<IReportRepository, ReportRepository>();            
-            
+            services.AddTransient<IReportRepository, ReportRepository>();       
 
             return services;
         }

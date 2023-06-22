@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace LmsService.Data.Model.Report
 {
@@ -13,12 +11,12 @@ namespace LmsService.Data.Model.Report
         public Int64 ActualProduction { get; set; }
         public int ActualProduction1h { get; set; }
         public decimal RatioOfCurrentShiftDuration { get; set; }
-        public Int64 Vacio { get; set; }
-        public Int64 Llenadora { get; set; }
-        public Int64 Lleno { get; set; }
-        public int Vacio1h { get; set; }
-        public int Llenadora1h { get; set; }
-        public int Lleno1h { get; set; }
+        public decimal Vacio { get; set; }
+        public decimal Llenadora { get; set; }
+        public decimal Lleno { get; set; }
+        public decimal Vacio1h { get; set; }
+        public decimal Llenadora1h { get; set; }
+        public decimal Lleno1h { get; set; }
         public decimal UP { get; set; }
         public decimal O2 { get; set; }
         public decimal CO2 { get; set; }

@@ -120,11 +120,23 @@
             An REST-ful api-controller for storing and retrieving the names of guests who visited this instance.
             </summary>
         </member>
-        <member name="M:LmsService.Implementation.Controllers.V1.AutocontrolController.GetAll">
+        <member name="M:LmsService.Implementation.Controllers.V1.AutocontrolController.GetAutocontrols">
             <summary>
-            Gets all entries in the list of guests.
+            Gets all entries in the list of Autocontrols.
             </summary>
-            <returns>The entire list of guests who immortalized themselves in this session.</returns>
+            <returns>The entire list of Autocontrols who immortalized themselves in this session.</returns>
+        </member>
+        <member name="M:LmsService.Implementation.Controllers.V1.AutocontrolController.GetDialogFields(System.Int32)">
+            <summary>
+            Gets all Fields of specific Autocontrol.
+            </summary>
+            <returns>The entire list of Fields who immortalized themselves in this session.</returns>
+        </member>
+        <member name="M:LmsService.Implementation.Controllers.V1.AutocontrolController.UpdateAutocontrolField(System.Int32,LmsService.Data.Model.Autocontrol.AutocontrolField)">
+            <summary>
+            Update specific field.
+            </summary>
+            <returns>The number of affected row.</returns>
         </member>
         <member name="T:LmsService.Implementation.Controllers.V1.DashboardController">
             <summary>

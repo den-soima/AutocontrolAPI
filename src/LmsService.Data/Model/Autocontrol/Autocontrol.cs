@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace LmsService.Data.Model
+namespace LmsService.Data.Model.Autocontrol
 {
     public class Autocontrol
     {
