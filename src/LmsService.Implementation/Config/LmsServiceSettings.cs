@@ -18,6 +18,8 @@ namespace LmsService.Implementation.Config
 
         public string DatabaseConnectionString { get; set; }
 
+        public string AutocontrolFilesPath { get; set; }
+
         public DelegationFlowSettings DelegationFlowSettings { get; set; } = new DelegationFlowSettings
         {
             ClientId = "LmsClient",

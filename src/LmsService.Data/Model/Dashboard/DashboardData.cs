@@ -31,8 +31,6 @@ namespace LmsService.Data.Model.Dashboard
         public int nTank2 { get; set; }
         public decimal nVolTank1 { get; set; }
         public decimal WaterRate { get; set; }
-        public Int64 secProductionTime { get; set; }
-
-
+        public Int64 secProductionTime { get; set; }        
     }
 }

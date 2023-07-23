@@ -41,7 +41,7 @@ namespace LmsService.Implementation.Config
         {
             int indexOfConfig = basePath.IndexOf("config");
 
-            basePath = basePath.Substring(0, indexOfConfig)+ "src\\LmsService.Implementation\\Config\\";
+            basePath = basePath.Substring(0, indexOfConfig) + "Config\\LmsModule";
 
            
             if (File.Exists(Path.Combine(basePath, ConfigurationConstants.LmsServiceConfigFileName)))

@@ -8,7 +8,7 @@ namespace LmsService.Data.Model.Autocontrol
     public class Autocontrol
     {
         [Key]
-        public int nACId { get; set; }
+        public int nACId { get; set; }        
 
         public string szLineName { get; set; }
         public string szACName { get; set; }

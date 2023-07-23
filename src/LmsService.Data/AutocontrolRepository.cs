@@ -5,6 +5,10 @@ using LmsService.Data.Model.Autocontrol;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Data.SqlClient;
 using System.Data;
+using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace LmsService.Data
 {
@@ -17,9 +21,28 @@ namespace LmsService.Data
         {
             _context = context;
         }
-        public IQueryable<Autocontrol> GetAutocontrols()
+        public IQueryable<Autocontrol> GetAutocontrols(string szPiTBaseUserUid)
         {
-            var value = _context.Autocontrols.FromSqlRaw<Autocontrol>("EXECUTE [zmod].[sp_LmsAutoControlGet]");
+
+            var nKey = new SqlParameter("@nKey", SqlDbType.Int);
+            var nStatus = new SqlParameter("@nStatus", SqlDbType.Int);
+            var nUserLink = new SqlParameter("@nUserLink", SqlDbType.Int);
+            var nLanguageId = new SqlParameter("nLanguageId", SqlDbType.Int);
+            var szPiTBaseUser = new SqlParameter("@szPiTBaseUser", SqlDbType.NVarChar);
+
+            nKey.Value = DBNull.Value;
+            nStatus.Value = DBNull.Value;
+            nUserLink.Value = DBNull.Value;
+            nLanguageId.Value = 10;
+            if (String.IsNullOrWhiteSpace(szPiTBaseUserUid))
+                szPiTBaseUser.Value = DBNull.Value;
+            else
+                szPiTBaseUser.Value = szPiTBaseUserUid;
+
+            var value = _context.Autocontrols.FromSqlRaw<Autocontrol>($"EXECUTE [zmod].[sp_LmsAutoControlGet] @nKey, @nStatus, @nUserLink, @nLanguageId, @szPiTBaseUser",
+                parameters: new[] { nKey, nStatus, nUserLink, nLanguageId, szPiTBaseUser });
+            //var value = _context.Autocontrols.FromSqlRaw<Autocontrol>($"EXECUTE [zmod].[sp_LmsAutoControlGet] @szPiTBaseUser={szPiTBaseUserUid}");
+
             return value;
         }
 
@@ -47,6 +70,7 @@ namespace LmsService.Data
             var tDataMeasured = new SqlParameter("@tDataMeasured", SqlDbType.BigInt);
             var tLastUpdated = new SqlParameter("@tLastUpdated", SqlDbType.BigInt);
             var bDeleted = new SqlParameter("@bDeleted", SqlDbType.Bit);
+            var szPiTBaseUser = new SqlParameter("@szPiTBaseUser", SqlDbType.NVarChar);
 
             nKey.Value = field.nKey;
             nKeyAC.Value = DBNull.Value;
@@ -58,14 +82,41 @@ namespace LmsService.Data
             tDataMeasured.Value = DBNull.Value;
             tLastUpdated.Value = DBNull.Value;
             bDeleted.Value = false;
+            szPiTBaseUser.Value = field.szPiTBaseUserUid;
 
-            var rowAffected = _context.Database.ExecuteSqlRaw($"EXECUTE [zmod].[sp_LmsAutoControlFieldsWrite] @nKey, @nKeyAC, @nDataXLinkAutoControlField, @rMaxValue, @rMinValue, @szValue, @nUserLink, @tDataMeasured, @tLastUpdated, @bDeleted",
-                    parameters: new[] { nKey, nKeyAC, nDataXLinkAutoControlField, rMaxValue, rMinValue, szValue, nUserLink, tDataMeasured, tLastUpdated, bDeleted });
+            var rowAffected = _context.Database.ExecuteSqlRaw($"EXECUTE [zmod].[sp_LmsAutoControlFieldsWrite] @nKey, @nKeyAC, @nDataXLinkAutoControlField, @rMaxValue, @rMinValue, @szValue, @nUserLink, @tDataMeasured, @tLastUpdated, @bDeleted, @szPiTBaseUser",
+                    parameters: new[] { nKey, nKeyAC, nDataXLinkAutoControlField, rMaxValue, rMinValue, szValue, nUserLink, tDataMeasured, tLastUpdated, bDeleted, szPiTBaseUser });
 
             // var rowAffected = _context.Database.ExecuteSqlInterpolated($"EXECUTE [zmod].[sp_LmsAutoControlFieldsWrite] @nKey ={field.nKey}, @szValue={field.szValue}");
 
             return rowAffected;
         }
+
+        public async Task<long> CreateAutocontrolFile(int nACFId, IFormFile file, string lmsFolderPath, string fileName)
+        {
+            DateTime today = DateTime.UtcNow.Date;
+            string dateFolderName = today.Year.ToString() + "-" + (today.Month < 10 ? "0" + today.Month.ToString() : today.Month.ToString()) + "-" + today.Day.ToString();
+
+            string lineIdFolderName = nACFId.ToString();
+
+            string fullPath = Path.Combine(lmsFolderPath, dateFolderName, lineIdFolderName);
+
+            if (!Directory.Exists(fullPath))
+                Directory.CreateDirectory(fullPath);
+
+            var filePath = fullPath + "\\" + fileName;
+
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.CopyToAsync(fileStream);
+            }
+
+            long size = new FileInfo(filePath).Length;
+
+            return size;
+        }
+
+
     }
 
 }

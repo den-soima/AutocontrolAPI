@@ -48,6 +48,7 @@
     <DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
   </PropertyGroup>
   <ItemGroup>
+    <Folder Include="log\LmsModule\LmsService\" />
     <Folder Include="wwwroot\" />
     <PackageReference Include="PlantiT.Base.AngularHosting" Version="3.1.1" />
     <Compile Remove="ClientApp\**" />

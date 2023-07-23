@@ -9,6 +9,10 @@ using PlantiT.Base.PolicyValidation.Attributes;
 using LmsService.Data;
 using LmsService.Data.Model.Autocontrol;
 using Microsoft.AspNetCore.JsonPatch;
+using System.IO;
+using Microsoft.AspNetCore.Http;
+using System.Net.Http.Headers;
+using LmsService.Implementation.Config;
 
 namespace LmsService.Implementation.Controllers.V1
 {
@@ -27,10 +31,12 @@ namespace LmsService.Implementation.Controllers.V1
     public class AutocontrolController : ControllerBase
     {
         private IAutocontrolRepository _autocontrolRepository;
+        private LmsServiceSettings _lmsServiceSettings;
 
-        public AutocontrolController(IAutocontrolRepository autocontrolRepository)
+        public AutocontrolController(IAutocontrolRepository autocontrolRepository, LmsServiceSettings settings)
         {
             this._autocontrolRepository = autocontrolRepository;
+            this._lmsServiceSettings = settings;
         }
         /// <summary>
         /// Gets all entries in the list of Autocontrols.
@@ -39,11 +45,11 @@ namespace LmsService.Implementation.Controllers.V1
         [HttpGet]
         //[RequiresPermission("Guest","Read")]
         [Produces(typeof(List<Autocontrol>))] //Required for API-Documentation; this way required data structures are also documented.
-        public IActionResult GetAutocontrols()
+        public IActionResult GetAutocontrols(string? szPiTBaseUserUid = null)
         {
             try
             {
-                var autocontrols = _autocontrolRepository.GetAutocontrols();              
+                var autocontrols = _autocontrolRepository.GetAutocontrols(szPiTBaseUserUid);
                 return Ok(autocontrols);
             }
             catch (Exception ex)
@@ -74,22 +80,18 @@ namespace LmsService.Implementation.Controllers.V1
         }
 
         /// <summary>
-        /// Update specific field.
+        /// Gets all Enums for specific Autocontrol fied.
         /// </summary>
-        /// <returns>The number of affected row.</returns>
-        [HttpPut("field/{nACFKey:int}")]
+        /// <returns>The entire list of Fields who immortalized themselves in this session.</returns>
+        [HttpGet("fieldenum/{nACFId}")]
         //[RequiresPermission("Guest","Read")]
-        [Produces(typeof(List<AutocontrolField>))] //Required for API-Documentation; this way required data structures are also documented.
-        public IActionResult UpdateAutocontrolField(int nACFKey, AutocontrolField field)
+        [Produces(typeof(List<AutocontrolFieldEnum>))] //Required for API-Documentation; this way required data structures are also documented.
+        public IActionResult GetEnumsByFieldId(int nACFId)
         {
             try
             {
-                if (nACFKey != field.nKey)
-                    return BadRequest("Field ID mismatch");
-               
-                    var rowAffected = _autocontrolRepository.UpdateAutocontrolField(field);
-                    return Ok(rowAffected);
-                         
+                var dialogFields = _autocontrolRepository.GetEnumsByFieldId(nACFId);
+                return Ok(dialogFields);
             }
             catch (Exception ex)
             {
@@ -98,7 +100,61 @@ namespace LmsService.Implementation.Controllers.V1
             }
         }
 
-        
+        /// <summary>
+        /// Upload files.
+        /// </summary>
+        /// <returns>Files count and size</returns>
+        [HttpPost("field/file/{nACFId}"), DisableRequestSizeLimit]
+        //[RequiresPermission("Guest","Read")]
+        [Produces(typeof(IFormFile))] //Required for API-Documentation; this way required data structures are also documented.    
+        public async Task<IActionResult> FilesUpload(int nACFId, IFormFile file)
+        {
+            if (file == null)
+                return BadRequest("File ");
+
+            try
+            {
+                string lmsFolderPath = _lmsServiceSettings.AutocontrolFilesPath;         
+
+                var fileName = Path.GetFileName(ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.ToString().Trim('"'));            
+
+                long size = await _autocontrolRepository.CreateAutocontrolFile(nACFId, file, lmsFolderPath, fileName);
+
+                return Ok(new { name = fileName, size = (size/1024).ToString() + " kB"});
+            }
+            catch (Exception ex)
+            {
+
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+
+        /// <summary>
+        /// Update autocontrol fields.
+        /// </summary>
+        /// <returns>The number of affected row.</returns>
+        [HttpPut("field")]
+        //[RequiresPermission("Guest","Read")]
+        [Produces(typeof(List<AutocontrolField>))] //Required for API-Documentation; this way required data structures are also documented.
+        public IActionResult UpdateAutocontrolField(AutocontrolField field)
+        {
+            try
+            {
+                if (field.nKey <= 0)
+                    return BadRequest("Field ID incorrect");
+
+                var rowAffected = _autocontrolRepository.UpdateAutocontrolField(field);
+                return Ok(rowAffected);
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+
 
     }
 }

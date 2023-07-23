@@ -10,22 +10,24 @@ namespace LmsService.Data.Model.Autocontrol
         [Key]
         public int nKey { get; set; }
 
-        public int nKeyAC { get; set; }
+        public int? nKeyAC { get; set; }
 
-        public int nDataXLinkAutoControlField { get; set; }    
+        public int? nDataXLinkAutoControlField { get; set; }    
        
-        public decimal rMinValue { get; set; }
+        public decimal? rMinValue { get; set; }
 
-        public decimal rMaxValue { get; set; }      
+        public decimal? rMaxValue { get; set; }      
 
         public string szValue { get; set; }
 
-        public int nUserLink { get; set; }
+        public int? nUserLink { get; set; }
 
-        public DateTime tDataMeasured { get; set; }
+        public DateTime? tDataMeasured { get; set; }
 
-        public DateTime tLastUpdated { get; set; }
+        public DateTime? tLastUpdated { get; set; }
 
-        public bool bDeleted { get; set; }
+        public bool? bDeleted { get; set; }
+
+        public string szPiTBaseUserUid { get; set; }
     }
 }

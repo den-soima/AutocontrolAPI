@@ -120,7 +120,7 @@
             An REST-ful api-controller for storing and retrieving the names of guests who visited this instance.
             </summary>
         </member>
-        <member name="M:LmsService.Implementation.Controllers.V1.AutocontrolController.GetAutocontrols">
+        <member name="M:LmsService.Implementation.Controllers.V1.AutocontrolController.GetAutocontrols(System.String)">
             <summary>
             Gets all entries in the list of Autocontrols.
             </summary>
@@ -132,9 +132,21 @@
             </summary>
             <returns>The entire list of Fields who immortalized themselves in this session.</returns>
         </member>
-        <member name="M:LmsService.Implementation.Controllers.V1.AutocontrolController.UpdateAutocontrolField(System.Int32,LmsService.Data.Model.Autocontrol.AutocontrolField)">
+        <member name="M:LmsService.Implementation.Controllers.V1.AutocontrolController.GetEnumsByFieldId(System.Int32)">
             <summary>
-            Update specific field.
+            Gets all Enums for specific Autocontrol fied.
+            </summary>
+            <returns>The entire list of Fields who immortalized themselves in this session.</returns>
+        </member>
+        <member name="M:LmsService.Implementation.Controllers.V1.AutocontrolController.FilesUpload(System.Int32,Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            Upload files.
+            </summary>
+            <returns>Files count and size</returns>
+        </member>
+        <member name="M:LmsService.Implementation.Controllers.V1.AutocontrolController.UpdateAutocontrolField(LmsService.Data.Model.Autocontrol.AutocontrolField)">
+            <summary>
+            Update autocontrol fields.
             </summary>
             <returns>The number of affected row.</returns>
         </member>

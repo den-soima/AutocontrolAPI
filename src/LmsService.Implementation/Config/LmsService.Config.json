@@ -1,6 +1,7 @@
 {
   "LmsServiceSettings": {
     "ExampleSetting": "Value from config-file",
+    "AutocontrolFilesPath": "C:\\Temp\\AutocontrolFiles",
     "DatabaseConnectionString": "Server=ESBSJUM50\\PLANTIT;Database=dbIdc;User Id=sa; Password=ProAdmin777;Connection Timeout=300000"
   },
 

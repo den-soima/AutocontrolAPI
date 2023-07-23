@@ -51,6 +51,10 @@ namespace LmsService.Data.Services
             {
                 val.HasNoKey().ToView(null);
             });
+            modelBuilder.Entity<AutocontrolFieldEnum>(val =>
+            {
+                val.HasNoKey().ToView(null);
+            });
         }
         public DbSet<Autocontrol> Autocontrols { get; set; }
         public DbSet<DashboardData> Dashboard { get; set; }

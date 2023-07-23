@@ -3,8 +3,7 @@
 namespace LmsService.Data.Model.Autocontrol
 {
     public class AutocontrolFieldEnum
-    {
-        [Key]
+    {       
         public int nACFId { get; set; }
 
         public int nEnumValue { get; set; }

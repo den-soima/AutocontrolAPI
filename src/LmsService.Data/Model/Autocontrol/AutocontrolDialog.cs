@@ -26,6 +26,9 @@ namespace LmsService.Data.Model.Autocontrol
 
         public double rMaxValue { get; set; }      
 
-        public string szValue { get; set; }   
+        public string szValue { get; set; }
+
+        public string szValueDefault { get; set; }
+
     }
 }

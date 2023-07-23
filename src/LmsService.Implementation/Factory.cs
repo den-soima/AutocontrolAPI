@@ -118,7 +118,7 @@ namespace LmsService.Implementation
         #region Authentication configuration
 
         /// <summary>Set this to true, once secured API's should be accessed (e.g. of other module-services)</summary>
-        public static bool RequireAuthentication { get; private set; } = true;
+        public static bool RequireAuthentication { get; private set; } = false;
 
         /// <summary>
         /// The scopes (api-names) which are requested by swagger and are required to access
@@ -150,11 +150,11 @@ namespace LmsService.Implementation
         {
             // TODO for template-users:  Below is the configuration of a service which helps
             // sending authenticated http-requests.
-            services.AddTokenizedHttpClientProviderForClientCredentialsFlowConfiguration(
-                "LmsClient",
-                new List<string>() { "ScopeA", "ScopeB", "basecommon" },
-                "MySecret"
-                );
+            //services.AddTokenizedHttpClientProviderForClientCredentialsFlowConfiguration(
+            //    "LmsModuleClient",
+            //    new List<string>() { "openid", "profile", "basecommon" },
+            //    "MySecret"
+            //    );
 
             if (RequireAuthentication)
             {

@@ -51,7 +51,7 @@ namespace LmsService.Host
         private readonly IWebHostEnvironment env;
 
         /// <summary>The settings for this module-service</summary>
-        private readonly LmsServiceSettings settings;
+        private readonly LmsServiceSettings settings;      
 
         /// <summary> Creates a new instance of the <see cref="Startup"/> class. </summary>
         public Startup(IConfiguration configuration, IWebHostEnvironment env)
@@ -79,7 +79,7 @@ namespace LmsService.Host
                 Scopes = Implementation.Factory.ScopesSwaggerMustRequest,
                 OAuthClientId = $"{ConfigurationConstants.ModuleIdentifier}{ConfigurationConstants.ModuleServiceIdentifier}SwaggerClient",
             },
-            Factory.ControllerDocumentation);
+            Factory.ControllerDocumentation);         
 
             // ATTENTION:
             // ==========
@@ -89,7 +89,7 @@ namespace LmsService.Host
             services.AddPlantiTBase<Startup>(env);
 
             // A service logging the startup and shutdown of this module service
-            services.AddSingleton<StartStopLog>();
+            //services.AddSingleton<StartStopLog>();
             services.AddSingleton<ServiceConfiguration, LmsServiceConfiguration>();
 
             services.AddSingleton<LmsServiceSettings>(this.settings);
@@ -145,7 +145,7 @@ namespace LmsService.Host
             app.UseRouting();
 
             // The service logging the startup and shutdown of this module service
-            app.ApplicationServices.GetService(typeof(StartStopLog));
+            //app.ApplicationServices.GetService(typeof(StartStopLog));
 
             app.ConfigureApplicationForPlantiTBase(env, settings, logSettings);
 
